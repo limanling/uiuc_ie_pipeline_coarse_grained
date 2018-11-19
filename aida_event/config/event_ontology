@@ -1,0 +1,178 @@
+ldcOnt:Business.DeclareBankruptcy
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Business.End  a   owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Business.Merge
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Business.Start
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Conflict.Attack
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Conflict.Demonstrate
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Contact.Broadcast
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Contact.Contact
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Contact.Correspondence
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Contact.Meet  a   owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Existence.DamageDestroy
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Government.Agreements
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Government.Legislate
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Government.Spy
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Government.Vote
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Inspection.Artifact
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Inspection.People
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Acquit
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Appeal
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.ArrestJail
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.ChargeIndict
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Convict
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Execute
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Extradite
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Fine  a   owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Investigate
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Pardon
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.ReleaseParole
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Sentence
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.Sue  a    owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Justice.TrialHearing
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Life.BeBorn  a    owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Life.Die  a       owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Life.Divorce  a   owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Life.Injure  a    owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Life.Marry  a     owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Manufacture.Artifact
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Movement.TransportArtifact
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Movement.TransportPerson
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Personnel.Elect
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Personnel.EndPosition
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Personnel.Nominate
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Personnel.StartPosition
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Transaction.Transaction
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Transaction.TransferControl
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Transaction.TransferMoney
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .
+
+ldcOnt:Transaction.TransferOwnership
+        a                owl:Class ;
+        rdfs:subClassOf  aidaDomainCommon:EventType .

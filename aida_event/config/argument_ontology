@@ -1,0 +1,1531 @@
+ldcOnt:Business.DeclareBankruptcy_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.DeclareBankruptcy ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Business.DeclareBankruptcy_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.DeclareBankruptcy ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Business.DeclareBankruptcy_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.DeclareBankruptcy ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Business.End_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.End ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization .
+
+ldcOnt:Business.End_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.End ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Business.End_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.End ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Business.Merge_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Merge ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization .
+
+ldcOnt:Business.Merge_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Merge ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Business.Merge_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Merge ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Business.Start_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Start ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Business.Start_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Start ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization .
+
+ldcOnt:Business.Start_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Start ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Business.Start_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Business.Start ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Conflict.Attack_Attacker
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Attack ;
+        rdfs:label            "Attacker" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Conflict.Attack_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Attack ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Commodity .
+
+ldcOnt:Conflict.Attack_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Attack ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Conflict.Attack_Target
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Attack ;
+        rdfs:label            "Target" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Vehicle , ldcOnt:GeopoliticalEntity , ldcOnt:Facility , ldcOnt:Location , ldcOnt:Person , ldcOnt:Commodity , ldcOnt:Weapon .
+
+ldcOnt:Conflict.Attack_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Attack ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Conflict.Demonstrate_Demonstrator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Demonstrate ;
+        rdfs:label            "Demonstrator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization .
+
+ldcOnt:Conflict.Demonstrate_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Demonstrate ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Conflict.Demonstrate_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Conflict.Demonstrate ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Contact.Broadcast_Audience
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Broadcast ;
+        rdfs:label            "Audience" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Contact.Broadcast_Broadcaster
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Broadcast ;
+        rdfs:label            "Broadcaster" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Contact.Broadcast_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Broadcast ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Contact.Broadcast_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Broadcast ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Contact.Contact_Participant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Contact ;
+        rdfs:label            "Participant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Contact.Contact_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Contact ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Contact.Contact_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Contact ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Contact.Correspondence_Participant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Correspondence ;
+        rdfs:label            "Participant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Contact.Correspondence_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Correspondence ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Contact.Correspondence_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Correspondence ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Contact.Meet_Participant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Meet ;
+        rdfs:label            "Participant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Contact.Meet_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Meet ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Contact.Meet_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Contact.Meet ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Existence.DamageDestroy_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Existence.DamageDestroy ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Existence.DamageDestroy_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Existence.DamageDestroy ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Commodity .
+
+ldcOnt:Existence.DamageDestroy_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Existence.DamageDestroy ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Existence.DamageDestroy_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Existence.DamageDestroy ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Existence.DamageDestroy_Victim
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Existence.DamageDestroy ;
+        rdfs:label            "Victim" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Ballot , ldcOnt:Facility , ldcOnt:Commodity , ldcOnt:Vehicle .
+
+ldcOnt:Government.Agreements_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Agreements ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Government.Agreements_Signer
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Agreements ;
+        rdfs:label            "Signer" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Government.Agreements_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Agreements ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Government.Legislate_Law
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Legislate ;
+        rdfs:label            "Law" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Law .
+
+ldcOnt:Government.Legislate_Legislature
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Legislate ;
+        rdfs:label            "Legislature" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization .
+
+ldcOnt:Government.Legislate_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Legislate ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Government.Legislate_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Legislate ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Government.Spy_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Spy ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Government.Spy_Beneficiary
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Spy ;
+        rdfs:label            "Beneficiary" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Government.Spy_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Spy ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Government.Spy_Target
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Spy ;
+        rdfs:label            "Target" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Government.Spy_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Spy ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Government.Vote_Ballot
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Ballot" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Ballot .
+
+ldcOnt:Government.Vote_Candidate
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Candidate" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:Law .
+
+ldcOnt:Government.Vote_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Government.Vote_Results
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Results" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Results .
+
+ldcOnt:Government.Vote_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Government.Vote_Voter
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Government.Vote ;
+        rdfs:label            "Voter" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Inspection.Artifact_Inspector
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.Artifact ;
+        rdfs:label            "Inspector" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Inspection.Artifact_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.Artifact ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Inspection.Artifact_Thing
+        a                     owl:ObjectProperty , owl:Class ;
+        rdfs:domain           ldcOnt:Inspection.Artifact ;
+        rdfs:label            "Thing" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Facility , ldcOnt:Commodity , ldcOnt:Weapon , ldcOnt:Ballot , ldcOnt:Vehicle .
+
+ldcOnt:Inspection.Artifact_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.Artifact ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Inspection.People_Inspector
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.People ;
+        rdfs:label            "Inspector" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Inspection.People_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.People ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Inspection.People_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.People ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Inspection.People_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Inspection.People ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Acquit_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Acquit ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Acquit_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Acquit ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Acquit_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Acquit ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Acquit_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Acquit ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Acquit_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Acquit ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Appeal_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Appeal_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Appeal_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Appeal_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Appeal_Prosecutor
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Prosecutor" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Appeal_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Appeal ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.ArrestJail_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ArrestJail ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.ArrestJail_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ArrestJail ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.ArrestJail_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ArrestJail ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Justice.ArrestJail_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ArrestJail ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.ArrestJail_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ArrestJail ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.ChargeIndict_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.ChargeIndict_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.ChargeIndict_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.ChargeIndict_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.ChargeIndict_Prosecutor
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Prosecutor" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.ChargeIndict_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ChargeIndict ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Convict_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Convict ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Convict_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Convict ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Convict_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Convict ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Convict_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Convict ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Convict_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Convict ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Execute_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Execute ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Execute_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Execute ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Execute_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Execute ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Justice.Execute_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Execute ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Execute_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Execute ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Extradite_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Extradite_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Extradite_Destination
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Destination" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Extradite_Origin
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Origin" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Extradite_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Justice.Extradite_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Extradite ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Fine_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Fine_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Fine_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Fine_Money
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Money" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Money .
+
+ldcOnt:Justice.Fine_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Fine_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Fine ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Investigate_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Investigate ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Investigate_Investigatee
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Investigate ;
+        rdfs:label            "Investigatee" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Investigate_Investigator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Investigate ;
+        rdfs:label            "Investigator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Investigate_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Investigate ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Investigate_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Investigate ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Pardon_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Pardon ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Pardon_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Pardon ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Pardon_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Pardon ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Pardon_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Pardon ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Pardon_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Pardon ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.ReleaseParole_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ReleaseParole ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.ReleaseParole_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ReleaseParole ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.ReleaseParole_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ReleaseParole ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Justice.ReleaseParole_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ReleaseParole ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.ReleaseParole_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.ReleaseParole ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Sentence_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Sentence_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Sentence_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Sentence_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Sentence_Sentence
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Sentence" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sentence .
+
+ldcOnt:Justice.Sentence_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sentence ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.Sue_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Sue_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.Sue_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Sue_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.Sue_Plaintiff
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Plaintiff" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.Sue_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.Sue ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Justice.TrialHearing_Adjudicator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Adjudicator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.TrialHearing_Crime
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Crime" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Crime .
+
+ldcOnt:Justice.TrialHearing_Defendant
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Defendant" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.TrialHearing_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Justice.TrialHearing_Prosecutor
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Prosecutor" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Justice.TrialHearing_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Justice.TrialHearing ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Life.BeBorn_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.BeBorn ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Life.BeBorn_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.BeBorn ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Life.BeBorn_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.BeBorn ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Life.Die_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Die ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Life.Die_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Die ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Commodity .
+
+ldcOnt:Life.Die_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Die ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Life.Die_Time  a       owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Die ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Life.Die_Victim
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Die ;
+        rdfs:label            "Victim" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Life.Divorce_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Divorce ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Life.Divorce_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Divorce ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Life.Divorce_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Divorce ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Life.Injure_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Injure ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Life.Injure_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Injure ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Commodity .
+
+ldcOnt:Life.Injure_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Injure ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Life.Injure_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Injure ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Life.Injure_Victim
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Injure ;
+        rdfs:label            "Victim" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Life.Marry_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Marry ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Life.Marry_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Marry ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Life.Marry_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Life.Marry ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Manufacture.Artifact_Artifact
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Manufacture.Artifact ;
+        rdfs:label            "Artifact" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Facility , ldcOnt:Commodity .
+
+ldcOnt:Manufacture.Artifact_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Manufacture.Artifact ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Facility , ldcOnt:Commodity .
+
+ldcOnt:Manufacture.Artifact_Manufacturer
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Manufacture.Artifact ;
+        rdfs:label            "Manufacturer" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Manufacture.Artifact_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Manufacture.Artifact ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Manufacture.Artifact_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Manufacture.Artifact ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Movement.TransportArtifact_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Movement.TransportArtifact_Artifact
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Artifact" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle , ldcOnt:Facility , ldcOnt:Commodity .
+
+ldcOnt:Movement.TransportArtifact_Destination
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Destination" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Movement.TransportArtifact_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle .
+
+ldcOnt:Movement.TransportArtifact_Origin
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Origin" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Movement.TransportArtifact_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportArtifact ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Movement.TransportPerson_Agent
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Agent" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Movement.TransportPerson_Destination
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Destination" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Movement.TransportPerson_Instrument
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Instrument" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Weapon , ldcOnt:Vehicle .
+
+ldcOnt:Movement.TransportPerson_Origin
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Origin" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Movement.TransportPerson_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Movement.TransportPerson_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Movement.TransportPerson ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Personnel.Elect_Elect
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Elect ;
+        rdfs:label            "Elect" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Personnel.Elect_Elector
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Elect ;
+        rdfs:label            "Elector" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Personnel.Elect_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Elect ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Personnel.Elect_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Elect ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Personnel.EndPosition_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.EndPosition ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Personnel.EndPosition_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.EndPosition ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Personnel.EndPosition_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.EndPosition ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Personnel.EndPosition_Position
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.EndPosition ;
+        rdfs:label            "Position" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Title .
+
+ldcOnt:Personnel.EndPosition_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.EndPosition ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Personnel.Nominate_Nominator
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Nominate ;
+        rdfs:label            "Nominator" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Personnel.Nominate_Nominee
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Nominate ;
+        rdfs:label            "Nominee" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Personnel.Nominate_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Nominate ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Personnel.Nominate_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.Nominate ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Personnel.StartPosition_Organization
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.StartPosition ;
+        rdfs:label            "Organization" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Personnel.StartPosition_Person
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.StartPosition ;
+        rdfs:label            "Person" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person .
+
+ldcOnt:Personnel.StartPosition_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.StartPosition ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Personnel.StartPosition_Position
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.StartPosition ;
+        rdfs:label            "Position" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Title .
+
+ldcOnt:Personnel.StartPosition_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Personnel.StartPosition ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Transaction.Transaction_Beneficiary
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.Transaction ;
+        rdfs:label            "Beneficiary" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.Transaction_Giver
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.Transaction ;
+        rdfs:label            "Giver" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.Transaction_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.Transaction ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Transaction.Transaction_Recipient
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.Transaction ;
+        rdfs:label            "Recipient" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.Transaction_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.Transaction ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Transaction.TransferControl_Beneficiary
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Beneficiary" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferControl_Giver
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Giver" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferControl_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Transaction.TransferControl_Recipient
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Recipient" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Sides , ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferControl_Territory
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Territory" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Transaction.TransferControl_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferControl ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Transaction.TransferMoney_Beneficiary
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Beneficiary" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferMoney_Giver
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Giver" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferMoney_Money
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Money" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Money .
+
+ldcOnt:Transaction.TransferMoney_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Transaction.TransferMoney_Recipient
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Recipient" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferMoney_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferMoney ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
+
+ldcOnt:Transaction.TransferOwnership_Beneficiary
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Beneficiary" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferOwnership_Giver
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Giver" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferOwnership_Place
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Place" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Location , ldcOnt:GeopoliticalEntity , ldcOnt:Facility .
+
+ldcOnt:Transaction.TransferOwnership_Recipient
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Recipient" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Person , ldcOnt:Organization , ldcOnt:GeopoliticalEntity .
+
+ldcOnt:Transaction.TransferOwnership_Thing
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Thing" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Commodity , ldcOnt:Vehicle , ldcOnt:Weapon , ldcOnt:Organization , ldcOnt:Facility .
+
+ldcOnt:Transaction.TransferOwnership_Time
+        a                     owl:Class , owl:ObjectProperty ;
+        rdfs:domain           ldcOnt:Transaction.TransferOwnership ;
+        rdfs:label            "Time" ;
+        rdfs:subClassOf       aidaDomainCommon:EventArgumentType ;
+        schema:rangeIncludes  ldcOnt:Time .
