@@ -16,8 +16,8 @@ if __name__ == '__main__':
     except:
         pass
 
-    # url = 'http://blender02.cs.rpi.edu:3300/elisa_ie/entity_discovery_and_linking/en'
-    url = 'http://0.0.0.0:3300/elisa_ie/entity_discovery_and_linking/en'
+    url = 'http://blender02.cs.rpi.edu:3300/elisa_ie/entity_discovery_and_linking/en'
+    # url = 'http://0.0.0.0:3300/elisa_ie/entity_discovery_and_linking/en'
     for i in os.listdir(indir):
         print('processing %s' % i)
         try:
@@ -28,7 +28,7 @@ if __name__ == '__main__':
             }
             r = requests.post(url, data=data, params=params)
             if r.status_code != 200:
-		continue
+                continue
             with open('%s/%s.tab' % (outdir, i), 'w') as fw:
                 fw.write(r.text.encode('utf-8'))
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
                 continue
             tab = open('%s/%s' % (outdir, i), 'r').read()
             if not tab:
-            	continue
+                continue
             fw.write(tab)
             # docid = i.replace('.ltf.xml.tab', '')
             # with open('%s/%s' % (outdir, i), 'r') as f:

@@ -20,6 +20,8 @@ def read_tab(pdata, add_conf=False):
             offset = tmp[3]
             docid = re.match('(.+):(\d+)-(\d+)', offset).group(1)
             kbid = tmp[4]
+            if kbid.startswith('NIL'):
+                kbid = '%s_%s' % (kbid, docid)
             etype = tmp[5]
             mtype = tmp[6]
             if add_conf:
@@ -82,10 +84,7 @@ def process(p_tab, p_out, prefix):
                                                       men[0],
                                                       men[1],
                                                       men[4]))
-        if kbid.startswith('NIL'):
-            out.write('%s\tlink\t%s_%s\n' % (entity_id, kbid, docid))
-        else:
-            out.write('%s\tlink\t%s\n' % (entity_id, kbid))
+        out.write('%s\tlink\t%s\n' % (entity_id, kbid))
         count += 1
 
     out.close()
