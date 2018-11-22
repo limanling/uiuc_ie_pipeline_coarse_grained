@@ -59,9 +59,9 @@ def doc_to_segment(doc2men_dict, raw_data_path, raw_data_path1=None):
     doc2segtext = {}
     doc2segoffset = {}
     for key in doc2men_dict:
-        fpath = raw_data_path + key + ".ltf.xml"
+        fpath = os.path.join(raw_data_path, key + ".ltf.xml")
         if not os.path.exists(fpath):
-            fpath = raw_data_path1 + key + ".ltf.xml"
+            fpath = os.path.join(raw_data_path1, key + ".ltf.xml")
         domobj = xmldom.parse(fpath)
         elementobj = domobj.documentElement
         subElementObj = elementobj.getElementsByTagName("SEG")
@@ -104,9 +104,9 @@ def doc_to_segment(doc2men_dict, raw_data_path, raw_data_path1=None):
 def doc_to_offset(f_list, raw_data_path, raw_data_path1=None):
     temp_doc_offset = {}
     for item in f_list:
-        fpath = raw_data_path + item + ".ltf.xml"
+        fpath = os.path.join(raw_data_path, item + ".ltf.xml")
         if not os.path.exists(fpath):
-            fpath = raw_data_path1 + item + ".ltf.xml"
+            fpath = os.path.join(raw_data_path1, item + ".ltf.xml")
         tree = ET.parse(fpath)
         root = tree.getroot()
         for doc in root:
@@ -165,7 +165,7 @@ if __name__ == '__main__':
     doc2segment, docseg2mention, doc2segtext, doc2segoffset = doc_to_segment(doc2mention, configs['ltf_data_path'])
     error = 0
     mkdir(configs['output_dir'])
-    with open(configs['output_dir'] + configs['output_file'], "w") as fmodel:
+    with open(os.path.join(configs['output_dir'], configs['output_file']), "w") as fmodel:
         for doc_id in docseg2mention:
             for segment in docseg2mention[doc_id]:
                 list_offset = []

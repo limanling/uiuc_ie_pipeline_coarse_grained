@@ -1,3 +1,4 @@
+import os
 import argparse
 
 pattern_config = argparse.ArgumentParser(description='relation extraction')
@@ -6,11 +7,11 @@ pattern_config.add_argument("--eval_path", type=str,
 pattern_params, _ = pattern_config.parse_known_args()
 
 train_corpus = "aida_relation/data/ere_filtered_train.txt"
-test_corpus = pattern_params.eval_path + "AIDA_plain_text.txt"
-system_results = pattern_params.eval_path + "AIDA_results.txt"
+test_corpus = os.path.join(pattern_params.eval_path, "AIDA_plain_text.txt")
+system_results = os.path.join(pattern_params.eval_path, "AIDA_results.txt")
 pattern_file = "aida_relation/data/ere_pattern.txt"
 other_label = "32"
-new_results_file = pattern_params.eval_path + "results_post.txt"
+new_results_file = os.path.join(pattern_params.eval_path, "results_post.txt")
 
 ####################################
 # counting entity type constraints

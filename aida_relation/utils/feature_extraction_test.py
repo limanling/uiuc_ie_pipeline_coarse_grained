@@ -232,6 +232,6 @@ if __name__ == "__main__":
         start = time.clock()
         out_dependency = shortest_dependency(params.converted_fpath, params.max_len)
         # print(out_dependency)
-        save_pickle(out_dependency, params.output_dir + params.dp_name)
+        save_pickle(out_dependency, os.path.join(params.output_dir, params.dp_name))
         end = time.clock()
         print(end-start)

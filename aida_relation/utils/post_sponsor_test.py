@@ -1,3 +1,4 @@
+import os
 import networkx as nx
 import spacy
 from spacy.tokenizer import Tokenizer
@@ -49,14 +50,14 @@ pattern_config.add_argument("--eval_path", type=str,
                           help="eval path, 0928/en/")
 pattern_params, _ = pattern_config.parse_known_args()
 
-post_results = pattern_params.eval_path + "results_post.txt"
+post_results = os.path.join(pattern_params.eval_path, "results_post.txt")
 # pattern_file = "/data/m1/shig4/AIDA/post_process/ace_patterns.txt"
-test_corpus = pattern_params.eval_path + "AIDA_plain_text.txt"
+test_corpus = os.path.join(pattern_params.eval_path, "AIDA_plain_text.txt")
 pattern_file = "aida_relation/data/sponsor_patterns"
 other_label = "32"
 sponsor_label = "35"
 sen_length = 10
-sponsor_results = pattern_params.eval_path + "results_post_sponsor.txt"
+sponsor_results = os.path.join(pattern_params.eval_path, "results_post_sponsor.txt")
 feature_set = []
 stop_words = ["in order to"]
 sim_feature_set = []

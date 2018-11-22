@@ -172,13 +172,13 @@ ERE_to_AIDA_final_ouput = {
     'sponsorship(Arg-1,Arg-2)': 'https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#GeneralAffiliation.Sponsorship'
 }
 generate_cs_config = argparse.ArgumentParser(description='generate cold start format KB')
-generate_cs_config.add_argument("--edl_cs", type=str,
+generate_cs_config.add_argument("--edl_cs", type=str,default="merged.cs",
                           help="set cuda id")
-generate_cs_config.add_argument("--aida_plain_text", type=str,
+generate_cs_config.add_argument("--aida_plain_text", type=str, default="AIDA_plain_text.txt",
                           help="train file path")
-generate_cs_config.add_argument("--aida_results", type=str,
+generate_cs_config.add_argument("--aida_results", type=str, default="results_post_sponsor.txt",
                           help="test file path")
-generate_cs_config.add_argument("--rel_cs", type=str,
+generate_cs_config.add_argument("--rel_cs", type=str, default="en.rel.cs",
                           help="relation cs file (final output)")
 output_params, _ = generate_cs_config.parse_known_args()
 
@@ -236,8 +236,11 @@ with open(plain_text) as fmodel:
     for line in fmodel:
         temp = line.strip().split("\t")
         # ltf_offset for mention1 and mention2
-        mention1 = temp[2].strip().split(" ")[0].strip()
-        mention2 = temp[2].strip().split(" ")[1].strip()
+        # mention1 = temp[2].strip().split(" ")[0].strip()
+        # mention2 = temp[2].strip().split(" ")[1].strip()
+        fixed_temp = temp[2].strip().split(":")
+        mention1 = fixed_temp[0] + ":" + fixed_temp[1].split(" ",1)[0]
+        mention2 = fixed_temp[1].split(" ",1)[1] + ":" + fixed_temp[2]
         type1 = temp[1].strip().split(" ")[0].strip()
         type2 = temp[1].strip().split(" ")[1].strip()
         seg_offset = temp[3].strip()
