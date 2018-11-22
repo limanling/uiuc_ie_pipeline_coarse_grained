@@ -28,7 +28,7 @@ if __name__ == '__main__':
             }
             r = requests.post(url, data=data, params=params)
             if r.status_code != 200:
-		continue
+                continue
             with open('%s/%s.tab' % (outdir, i), 'w') as fw:
                 fw.write(r.text.encode('utf-8'))
 
@@ -44,7 +44,7 @@ if __name__ == '__main__':
                 continue
             tab = open('%s/%s' % (outdir, i), 'r').read()
             if not tab:
-            	continue
+                continue
             fw.write(tab)
             # docid = i.replace('.ltf.xml.tab', '')
             # with open('%s/%s' % (outdir, i), 'r') as f:
