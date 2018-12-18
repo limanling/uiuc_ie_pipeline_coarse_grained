@@ -2,12 +2,14 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Final output to ColdStart++ including all components')
 parser.add_argument('-e', '--edl', help='EDL output file', required=True)
+parser.add_argument('-f', '--filler', help='Filler output file', required=True)
 parser.add_argument('-r', '--relation', help='Relation output file', required=True)
 parser.add_argument('-v', '--event', help='Event output file', required=True)
 parser.add_argument('-o', '--output_file', help='final output file', required=True)
 args = vars(parser.parse_args())
 
 edl_file_path = args['edl']
+filler_file_path = args['filler']
 relation_file_path = args['relation']
 event_file_path = args['event']
 output_file_path = args['output_file']
@@ -23,11 +25,8 @@ for one_line in open(mapping_file_path):
 # file_list = [edl_file_path, relation_file_path, event_file_path]
 
 f_final = open(output_file_path, 'w', encoding='utf-8')
-# for one_path in file_list:
-#     for one_line in open(one_path, encoding='utf-8'):
-#         one_line = one_line.strip()
-#         f_final.write('%s\n' % one_line)
 
+# EDL
 for one_line in open(edl_file_path, encoding='utf-8'):
     one_line = one_line.strip()
     one_line_list = one_line.split('\t')
@@ -36,10 +35,23 @@ for one_line in open(edl_file_path, encoding='utf-8'):
     new_line = '\t'.join(one_line_list)
     f_final.write('%s\n' % new_line)
 
+# Filler
+
+for one_line in open(filler_file_path, encoding='utf-8'):
+    one_line = one_line.strip()
+    one_line_list = one_line.split('\t')
+    if len(one_line_list) == 3:
+        if one_line_list[1] == 'type':
+            one_line_list[2] = ontology_mapping_dict[one_line_list[2]]
+            one_line = '\t'.join(one_line_list)
+    f_final.write('%s\n' % one_line)
+
+# Relation
 for one_line in open(relation_file_path, encoding='utf-8'):
     one_line = one_line.strip()
     f_final.write('%s\n' % one_line)
 
+# Event
 for one_line in open(event_file_path, encoding='utf-8'):
     one_line = one_line.strip()
     one_line_list = one_line.split('\t')

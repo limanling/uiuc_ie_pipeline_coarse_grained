@@ -141,12 +141,6 @@ parser.add_argument('-l', '--list', help='LTF file list', required=True)
 parser.add_argument('-o', '--output_folder', help='Output folder', required=True)
 args = vars(parser.parse_args())
 
-# document_list_file_path = 'data/rico_hurricane/rico_en_lst'
-# edl_folder_path = 'data/edl_sample'
-# entity_cs_file_path = os.path.join(edl_folder_path, 'linking.corf.cs')
-# tdf_folder_path = 'data/tdf'
-# temp_output_folder_path = 'data/temp_output'
-
 document_list_file_path = args['list']
 edl_folder_path = args['edl_folder']
 entity_cs_file_path = os.path.join(edl_folder_path, 'merged.cs')
@@ -246,7 +240,7 @@ for one_line in open(document_list_file_path):
             string_to_write_list.append(argument_info_string)
     # break
 
-f = open(os.path.join(output_folder_path, "events.cs"), "w")
+f = open(os.path.join(output_folder_path, "events_raw.cs"), "w")
 for one_item in string_to_write_list:
     f.write("%s\n" % one_item)
 f.close()
