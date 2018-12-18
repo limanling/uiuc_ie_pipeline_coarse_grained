@@ -66,7 +66,10 @@ class LTF:
                     token_dict['original_text'] = one_token[0]
                     token_dict['pos'] = one_token[1]
                     token_dict['label'] = 'O'
-                    token_dict['start_char'] = int(one_SEG.findall("TOKEN")[one_token_idx].attrib["start_char"])
+                    try:
+                        token_dict['start_char'] = int(one_SEG.findall("TOKEN")[one_token_idx].attrib["start_char"])
+                    except IndexError:
+                        continue
                     token_dict['end_char'] = int(one_SEG.findall("TOKEN")[one_token_idx].attrib["end_char"]) + 1 # remember to +1 when you are doing with Python
                     for one_label_id in brat_annotation.annotation_dict['sequence_label']:
                         if token_dict['start_char'] >= brat_annotation.annotation_dict['sequence_label'][one_label_id]['start_char'] and token_dict['end_char'] <= brat_annotation.annotation_dict['sequence_label'][one_label_id]['end_char']:
