@@ -16,7 +16,6 @@ if __name__ == '__main__':
     except:
         pass
 
-    # url = 'http://blender02.cs.rpi.edu:3300/elisa_ie/entity_discovery_and_linking/en'
     url = 'http://0.0.0.0:3300/elisa_ie/entity_discovery_and_linking/en'
     for i in os.listdir(indir):
         print('processing %s' % i)
