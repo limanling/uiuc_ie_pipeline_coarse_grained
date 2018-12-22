@@ -31,12 +31,15 @@ class LearningCore:
 
         if tensorflow_session is None:
             if gpu_device >= 0:
+                print("Now we are working with GPU")
                 session_config = tf.ConfigProto(device_count={'GPU': 1})
                 session_config.gpu_options.visible_device_list = str(gpu_device)
                 session_config.gpu_options.allow_growth = True
                 self.sess = tf.Session(config=session_config)
             else:
-                self.sess = tf.Session()
+                print("Now we are working with CPU")
+                session_config = tf.ConfigProto(device_count={'GPU': 0})
+                self.sess = tf.Session(config=session_config)
         else:
             self.sess = tensorflow_session
 

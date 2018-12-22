@@ -100,7 +100,7 @@ docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_r
 python aida_relation/utils/generate_CS_ere_sh.py --edl_cs ${edl_cs} --aida_plain_text ${relation_tmp_output_dir}/AIDA_plain_text.txt \
 --aida_results ${relation_tmp_output_dir}/results_post_sponsor.txt --rel_cs ${relation_result_dir}/${relation_cs_name}
 
-# Fillers and new relation
+## Fillers and new relation
 echo "Extracting fillers and new relation types"
 
 readlink -f ${rsd_source}/* > ${rsd_file_list}
@@ -120,7 +120,7 @@ echo "Extracting events"
 docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
 python aida_event/pipeline_aida_input.py -t ${event_dep_dir} -f ${ltf_source} -l ${ltf_file_list} -o ${event_tmp_tdf_dir}
 
-docker run --runtime=nvidia -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
 python aida_event/pipeline_aida_end2end.py -l ${ltf_file_list} -f ${ltf_source} -t ${event_tmp_tdf_dir} -e ${edl_output_dir} -o ${event_no_format_dir}
 
 docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \

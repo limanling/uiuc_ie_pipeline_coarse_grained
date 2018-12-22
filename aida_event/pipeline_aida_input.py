@@ -1,7 +1,6 @@
 from utils.common.ltf import LTF
 from utils.text.text_data_feeder_aida import TextDataFeeder
 from utils.common.io import *
-from utils.text.stanford_nltk_wrapper import StanfordNLTKWrapper
 
 import os
 import pickle
@@ -32,7 +31,6 @@ else:
     os.mkdir(output_folder_path)
 
 dev_tdf = pickle.load(open("aida_event/data/argument_dev_tdf.pkl", "rb"))
-snw = StanfordNLTKWrapper()
 
 # Read Word2Vec model
 print("Loading pretrained word embedding")
@@ -53,7 +51,7 @@ for one_line in open(document_list_file_path):
     if os.path.exists(one_repository_path) is False:
         print("We don't have a file in repository!")
         one_file_path = os.path.join(ltf_folder_path, one_line)
-        one_ltf = LTF(snw, one_file_path, brat_annotation_folder='brat/data/ere_argument')
+        one_ltf = LTF(one_file_path, brat_annotation_folder='brat/data/ere_argument')
         pickle.dump(one_ltf, open(one_repository_path, 'wb'))
     else:
         print("We have a file in repository!")
