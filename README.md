@@ -24,6 +24,7 @@ Step 1. Start the EDL mongo database server
 ```bash
 docker run --rm -v ${PWD}/aida_edl/index/db:/data/db --name db mongo
 ```
+Please wait until you see "waiting for connections on port 27017" message appear on the screen.
 
 Step 2. Start the EDL server
 ```bash

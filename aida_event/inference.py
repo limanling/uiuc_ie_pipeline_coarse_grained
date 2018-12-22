@@ -171,10 +171,10 @@ def evaluation_pipeline(learning_core, data_feeder, new_info_box):
 
                 one_right_embedding = np.zeros([data_feeder.max_length, 2 * learning_core.token_lstm_memory],
                                                dtype=np.float32)
-                one_right_length = input_batch["sequence_length"][one_batch_idx] - right_index + 1
+                one_right_length = input_batch["sequence_length"][one_batch_idx] - right_index
                 one_right_embedding[0:one_right_length, :] = context_representation[one_batch_idx,
                                                              right_index:input_batch["sequence_length"][
-                                                                             one_batch_idx] + 1,
+                                                                             one_batch_idx],
                                                              :]
                 right_context_embedding_input.append(one_right_embedding)
                 right_context_lenght_input.append(one_right_length)

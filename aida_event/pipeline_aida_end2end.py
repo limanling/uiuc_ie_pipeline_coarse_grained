@@ -1,9 +1,8 @@
 from utils.common.io import *
-# from utils.common.ace import *
 from utils.text.text_data_feeder_aida import TextDataFeeder
 from utils.text.word_idx_dict import WordIdxDict
-from evaluation_evaluation import evaluation_pipeline
-from learning_core_imitation_evaluation import LearningCore
+from inference import evaluation_pipeline
+from learning_core_imitation import LearningCore
 
 import xml.etree.ElementTree as ET
 import shutil
@@ -215,9 +214,9 @@ learning_core = LearningCore(token_vocab_size=len(dev_tdf.token_idx_dict.word2id
                              pos_vocab_size=len(dev_tdf.pos_idx_dict.word2idx_dict),
                              char_vocab_size=len(dev_tdf.char_idx_dict.char2idx_dict),
                              dep_vocab_size=len(dev_tdf.dep_idx_dict.struct2idx_dict),
-                             gpu_device=0,
+                             gpu_device=-1,
                              config_path="aida_event/config/xmie.json")
-learning_core.load('aida_event/data/model/core_epoch_00028_step_0001176.tfmodel')
+learning_core.load('aida_event/data/model/core_epoch_00026_step_0001092.tfmodel')
 
 tab_dict = __edl_tab_dict(tab_path)
 cs_dict = __edl_cs_dict(cs_path)
