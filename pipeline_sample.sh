@@ -4,7 +4,7 @@
 # Arguments 
 ######################################################
 # input root path
-data_root=data/rico_hurricane
+data_root=data/test
 
 # ltf source folder path
 ltf_source=${data_root}/ltf
@@ -119,6 +119,9 @@ python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
 
 ## Event
 echo "Extracting events"
+
+ls ${ltf_source} > ${ltf_file_list}
+
 docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_event/pipeline_aida_input.py -t ${event_dep_dir} -f ${ltf_source} -l ${ltf_file_list} -o ${event_tmp_tdf_dir}
 

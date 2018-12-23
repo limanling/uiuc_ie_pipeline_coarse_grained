@@ -4,13 +4,7 @@ import requests
 import subprocess
 PWD=os.path.dirname(os.path.abspath(__file__))
 
-
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('USAGE: python <ltf input dir> <output dir>')
-        exit()
-    indir = sys.argv[1]
-    outdir = sys.argv[2]
+def edl(indir, outdir):
     try:
         os.mkdir(outdir)
     except:
@@ -63,3 +57,11 @@ if __name__ == '__main__':
         'EDL'
     ]
     subprocess.call(' '.join(cmd), shell=True)
+
+if __name__ == '__main__':
+    if len(sys.argv) != 3:
+        print('USAGE: python <ltf input dir> <output dir>')
+        exit()
+    indir = sys.argv[1]
+    outdir = sys.argv[2]
+    edl(indir, outdir)
