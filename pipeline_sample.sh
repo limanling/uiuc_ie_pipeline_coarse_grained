@@ -65,38 +65,40 @@ python aida_edl/edl.py ${ltf_source} ${edl_output_dir}
 
 ## Relation
 echo "Extracting relations"
-if [[ ! -d "$relation_tmp_output_dir" ]]; then
+if [ -d "$relation_tmp_output_dir" ]
+then
+    echo "\nThe output directory already exists, \n "$relation_tmp_output_dir"\n Please double check.\n"
+else
     mkdir -p $relation_tmp_output_dir
-    echo -e "\ncreat new dir: "$relation_tmp_output_dir" for new run.\nPlease make sure the dir is correct!!!"
-else
-    echo -e "\nThe output directory already exists, \n "$relation_tmp_output_dir"\n Please double check.\n"
+    echo "\ncreated new dir: "$relation_tmp_output_dir" for new run.\nPlease make sure that the dir is correct!!!"
 fi
 
-if [[ ! -d "$relation_result_dir" ]]; then
+if [ -d "$relation_result_dir" ]
+then
+    echo "\nThe output directory already exists, \n "$relation_result_dir"\n Please double check.\n"
+else
     mkdir -p $relation_result_dir
-    echo -e "\ncreat new dir: "$relation_result_dir" for new run.\nPlease make sure the dir is correct!!!"
-else
-    echo -e "\nThe output directory already exists, \n "$relation_result_dir"\n Please double check.\n"
+    echo "\ncreated new dir: "$relation_result_dir" for new run.\nPlease make sure that the dir is correct!!!"
 fi
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/aida2inter.py --ltf_data_path ${ltf_source} --edl_result_path ${edl_tab} \
 --output_dir ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/feature_extraction_test.py --converted_fpath ${relation_tmp_output_dir}/AIDA_plain_text.txt \
 --output_dir ${relation_tmp_output_dir} --dp_name ${dp_name}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/eval_ere.py --eval_text_path ${eval_path} --dp_path ${dp_path} --eval_results_file ${eval_result}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/use_patterns.py --eval_path ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/post_sponsor_test.py --eval_path ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/generate_CS_ere_sh.py --edl_cs ${edl_cs} --aida_plain_text ${relation_tmp_output_dir}/AIDA_plain_text.txt \
 --aida_results ${relation_tmp_output_dir}/results_post_sponsor.txt --rel_cs ${relation_result_dir}/${relation_cs_name}
 
@@ -107,7 +109,7 @@ readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 java -mx5g -cp "${core_nlp_tool_path}/*" edu.stanford.nlp.pipeline.StanfordCoreNLP $* -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -filelist ${rsd_file_list} -outputDirectory ${core_nlp_output_path}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
                                       --edl_path ${edl_cs} \
                                       --text_dir ${rsd_source} \
@@ -117,19 +119,19 @@ python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
 
 ## Event
 echo "Extracting events"
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_event/pipeline_aida_input.py -t ${event_dep_dir} -f ${ltf_source} -l ${ltf_file_list} -o ${event_tmp_tdf_dir}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_event/pipeline_aida_end2end.py -l ${ltf_file_list} -f ${ltf_source} -t ${event_tmp_tdf_dir} -e ${edl_output_dir} -o ${event_no_format_dir}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_event/pipeline_aida_end2end_full.py -l ${ltf_file_list} -e ${edl_output_dir} -t ${event_tmp_tdf_dir} -f ${event_no_format_dir} -o ${event_result_dir}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_event/pipeline_aida_time_argument.py -l ${ltf_source} -f ${filler_output_path} -i ${event_raw_result_file} -o ${event_result_file_with_time}
 
 ## Final Merge
 echo "Merging all items"
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
-python aida_event/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -v ${event_result_file_with_time} -o ${final_output_file}
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
+python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_with_time} -o ${final_output_file}
