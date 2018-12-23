@@ -4,6 +4,7 @@ parser = argparse.ArgumentParser(description='Final output to ColdStart++ includ
 parser.add_argument('-e', '--edl', help='EDL output file', required=True)
 parser.add_argument('-f', '--filler', help='Filler output file', required=True)
 parser.add_argument('-r', '--relation', help='Relation output file', required=True)
+parser.add_argument('-n', '--newrelation', help='New relation output file', required=True)
 parser.add_argument('-v', '--event', help='Event output file', required=True)
 parser.add_argument('-o', '--output_file', help='final output file', required=True)
 args = vars(parser.parse_args())
@@ -11,6 +12,7 @@ args = vars(parser.parse_args())
 edl_file_path = args['edl']
 filler_file_path = args['filler']
 relation_file_path = args['relation']
+new_relation_file_path = args['newrelation']
 event_file_path = args['event']
 output_file_path = args['output_file']
 
@@ -50,6 +52,11 @@ for one_line in open(filler_file_path, encoding='utf-8'):
 for one_line in open(relation_file_path, encoding='utf-8'):
     one_line = one_line.strip()
     f_final.write('%s\n' % one_line)
+
+for one_line in open(new_relation_file_path, encoding='utf-8'):
+    one_line = one_line.strip()
+    f_final.write('%s\n' % one_line)
+
 
 # Event
 for one_line in open(event_file_path, encoding='utf-8'):
