@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-# This is merely a record file, don't run this file!
-docker run --runtime=nvidia -it --rm -v $PWD:/tmp -w /tmp -u `stat -c "%u:%g" ./` charlesztt/aida_event python aida_event/pipeline_aida_input.py -t data/dep -f data/rico_hurricane/rico_en -l data/rico_hurricane/rico_en_lst -o data/tdf
-docker run --runtime=nvidia -it --rm -v $PWD:/tmp -w /tmp -u `stat -c "%u:%g" ./` charlesztt/aida_event python aida_event/pipeline_aida_end2end.py -l data/rico_hurricane/rico_en_lst -f data/rico_hurricane/rico_en -t data/tdf -e data/edl_sample -o data/temp_output
-docker run --runtime=nvidia -it --rm -v $PWD:/tmp -w /tmp -u `stat -c "%u:%g" ./` charlesztt/aida_event python aida_event/pipeline_aida_end2end_full.py -l data/rico_hurricane/rico_en_lst -e data/edl_sample -t data/tdf -f data/temp_output -o data/event
