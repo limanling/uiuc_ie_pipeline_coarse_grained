@@ -122,17 +122,8 @@ echo "Extracting events"
 
 ls ${ltf_source} > ${ltf_file_list}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
-python aida_event/pipeline_aida_input.py -t ${event_dep_dir} -f ${ltf_source} -l ${ltf_file_list} -o ${event_tmp_tdf_dir}
-
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
-python aida_event/pipeline_aida_end2end.py -l ${ltf_file_list} -f ${ltf_source} -t ${event_tmp_tdf_dir} -e ${edl_output_dir} -o ${event_no_format_dir}
-
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
-python aida_event/pipeline_aida_end2end_full.py -l ${ltf_file_list} -e ${edl_output_dir} -t ${event_tmp_tdf_dir} -f ${event_no_format_dir} -o ${event_result_dir}
-
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
-python aida_event/pipeline_aida_time_argument.py -l ${ltf_source} -f ${filler_output_path} -i ${event_raw_result_file} -o ${event_result_file_with_time}
+mkdir ${event_result_dir}
+python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_output_path} -o ${event_result_file_with_time}
 
 ## Final Merge
 echo "Merging all items"
