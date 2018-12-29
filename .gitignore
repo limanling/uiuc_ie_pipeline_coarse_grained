@@ -26,6 +26,7 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+temp/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -195,3 +196,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# AIDA local rest api
+aida_api/
