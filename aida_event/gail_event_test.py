@@ -2,6 +2,7 @@ import requests
 import os
 import json
 import argparse
+import io
 
 # input_file_list_file_path = 'data/rico_hurricane/ltf_lst'
 # input_ltf_folder_path = 'data/rico_hurricane/ltf'
@@ -27,21 +28,21 @@ input_filler_cs_file_path = args['filler_cs']
 output_event_output_file_path = args['output_path']
 
 temp_dict = dict()
-temp_dict['edl_cs'] = open(input_edl_cs_file_path, encoding='utf-8').read()
-temp_dict['edl_tab'] = open(input_edl_tab_file_path, encoding='utf-8').read()
-temp_dict['filler_cs'] = open(input_filler_cs_file_path, encoding='utf-8').read()
+temp_dict['edl_cs'] = io.open(input_edl_cs_file_path, encoding='utf-8').read()
+temp_dict['edl_tab'] = io.open(input_edl_tab_file_path, encoding='utf-8').read()
+temp_dict['filler_cs'] = io.open(input_filler_cs_file_path, encoding='utf-8').read()
 temp_dict['input'] = dict()
-for one_line in open(input_file_list_file_path):
+for one_line in io.open(input_file_list_file_path):
     one_line = one_line.strip()
     temp_dict['input'][one_line] = dict()
     one_ltf_xml_file_path = os.path.join(input_ltf_folder_path, one_line)
-    temp_dict['input'][one_line]['ltf'] = open(one_ltf_xml_file_path).read()
+    temp_dict['input'][one_line]['ltf'] = io.open(one_ltf_xml_file_path).read()
 
 json_string = json.dumps(temp_dict)
 r = requests.post('http://127.0.0.1:5234/aida_event_en_imitation', json=json_string)
 if r.status_code == 200:
     print("Successfully extracted events")
-    f = open(output_event_output_file_path, 'w')
+    f = io.open(output_event_output_file_path, 'w')
     f.write(r.text)
     f.close()
 else:
