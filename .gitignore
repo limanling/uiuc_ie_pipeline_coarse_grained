@@ -198,8 +198,8 @@ Temporary Items
 
 # AIDA local rest api
 aida_api/
-#backup/
-#edl.sh
-#event.sh
-#relation.sh
-#merge.sh
+backup/
+edl.sh
+event.sh
+relation.sh
+merge.sh
