@@ -1,11 +1,13 @@
 # RPI AIDA Pipeline
-One single script to run AIDA pipeline
+One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https://blender04.cs.rpi.edu/~lim22/aida_api/extraction.html).
 
 ## Prerequisites
 ### Packages to install
-1. docker
-2. java
-3. python=2.7 with requests, jieba, nltk package installed (As most Linux distros deliver by default)
+1. Docker
+2. Java
+3. Python=2.7 with requests, jieba, nltk package installed (As most Linux distros deliver by default)
+
+Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
 ### Download the latest docker images
 Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie` and `zhangt13/aida_event`) or runtime environments (`zhangt13/aida_relation`).
@@ -15,6 +17,7 @@ docker pull panx27/edl
 docker pull elisarpi/elisa-ie
 docker pull zhangt13/aida_relation
 docker pull zhangt13/aida_event
+docker pull limanling/aida_converter
 ```
 
 ### Download the latest models
@@ -39,10 +42,12 @@ Please ensure that you are under the root folder of this project, and after each
 Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300` and `5234`.
 
 Step 1. Start the EDL mongo database server
+
+Please wait until you see "waiting for connections on port 27017" message appear on the screen.
+
 ```bash
 docker run --rm -v ${PWD}/aida_edl/index/db:/data/db --name db mongo
 ```
-Please wait until you see "waiting for connections on port 27017" message appear on the screen.
 
 Step 2. Start the EDL server
 ```bash
@@ -54,18 +59,36 @@ Step 3. Start the name tagger
 docker run --rm -p 3300:3300 --network="host" -v ${PWD}/aida_edl/models/:/usr/src/app/data/name_tagger/pytorch_models -ti elisarpi/elisa-ie /usr/src/app/lorelei_demo/run.py --preload --in_domain
 ```
 
-Step 4. Start the event extractor. This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
+Step 4. Start the event extractor
+
+This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
 docker run -i -t --rm -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
 ```
 
 Step 5. Prepare Stanford CoreNLP
-Download the latest Stanford CoreNLP and the English model file. Unzip the CoreNLP folder and put the model file into the folder. Take a note of the path to the CoreNLP folder.
+
+Download the latest Stanford CoreNLP and the English model file. Unzip the CoreNLP folder and put the model file into the folder. Please start the CoreNLP Server under the CoreNLP folder.
+
+```bash
+nohup java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9001 -timeout 150000 -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -lazy false &
+```
+
+Please test the CoreNLP Server is running successfully:
+```bash
+wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9001/?properties={"annotators":"tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions","outputFormat":"json"}'
+```
+<!-- Run Stanford CoreNLP using Docker.
+```bash
+docker pull graham3333/corenlp-complete
+docker run -itd -p 9000:9000 --name corenlp graham3333/corenlp-complete
+wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9000/?properties={"annotators":"tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions","outputFormat":"json"}'
+```-->
 
 ## Run the codes
 * Make sure that you have the LTF files.
 * Use the AIDA ltf2rsd tool (LDC2018E62_AIDA_Month_9_Pilot_Eval_Corpus_V1.0/tools/ltf2txt/ltf2rsd.perl) to generate the RSD files. 
-* Edit the `.sh` file for your run (including your input LTF/RSD files as well as the CoreNLP folders), then run the shell file. For example.
+* Edit the `pipeline_sample.sh` for your run, including `data_root` containing a subfolder `ltf` with your input LTF files and a subfolder `rsd` with your input RSD files. Then run the shell file. For example.
 ```bash
 sh pipeline_sample.sh
 ```
