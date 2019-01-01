@@ -12,8 +12,8 @@ def preprocess(rsd_file_list, core_nlp_output_paths):
     for rsd_file in rsd_files:
         file = io.open(rsd_file, encoding='utf-8')
         input_string = file.read()
-        # r = requests.post('http://localhost:9001/?properties={"annotators":"%s","outputFormat":"json"}' % (annotators),
-        r = requests.post('http://localhost:9001',
+        # r = requests.post('http://localhost:9000/?properties={"annotators":"%s","outputFormat":"json"}' % (annotators),
+        r = requests.post('http://localhost:9000',
                           data=input_string.encode('utf-8'))
         if r.status_code == 200:
             t_path = os.path.join(core_nlp_output_paths, os.path.split(rsd_file)[1]+".json")
