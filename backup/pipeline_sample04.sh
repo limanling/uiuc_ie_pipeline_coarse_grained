@@ -138,3 +138,5 @@ python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r
 #docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
 #python aida_event/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -o ${final_output_file}
 
+
+#docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params aida_converter /AIDA-Interchange-Format-master/target/appassembler/bin/coldstart2AidaInterchange /AIDA-Interchange-Format-master/sample_params/data/test/rpi_params

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ######################################################
-# Arguments 
+# Arguments
 ######################################################
 # input root path
 data_root=$1
@@ -24,7 +24,7 @@ rsd_file_list=${data_root}/rsd_lst
 readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 # stanford toolbox
-core_nlp_tool_path=/data/m1/lim22/env/stanford-corenlp-full-2018-10-05
+#core_nlp_tool_path=/data/m1/lim22/env/stanford-corenlp-full-2018-10-05
 
 # edl output
 edl_output_dir=${data_root}/edl
@@ -71,33 +71,34 @@ else
     echo "\ncreated new dir: "$relation_result_dir" for new run.\nPlease make sure that the dir is correct!!!"
 fi
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/aida2inter.py --ltf_data_path ${ltf_source} --edl_result_path ${edl_tab} \
 --output_dir ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/feature_extraction_test.py --converted_fpath ${relation_tmp_output_dir}/AIDA_plain_text.txt \
 --output_dir ${relation_tmp_output_dir} --dp_name ${dp_name}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/eval_ere.py --eval_text_path ${eval_path} --dp_path ${dp_path} --eval_results_file ${eval_result}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/use_patterns.py --eval_path ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/post_sponsor_test.py --eval_path ${relation_tmp_output_dir}
 
-docker run -it --rm -u `stat -c "%u:%g" ./` -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
+docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
 python aida_relation/utils/generate_CS_ere_sh.py --edl_cs ${edl_cs} --aida_plain_text ${relation_tmp_output_dir}/AIDA_plain_text.txt \
 --aida_results ${relation_tmp_output_dir}/results_post_sponsor.txt --rel_cs ${relation_result_dir}/${relation_cs_name}
 
-# Fillers and new relation
+## Fillers and new relation
 echo "Extracting fillers and new relation types"
 
-java -mx5g -cp "${core_nlp_tool_path}/*" edu.stanford.nlp.pipeline.StanfordCoreNLP $* -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -filelist ${rsd_file_list} -outputDirectory ${core_nlp_output_path}
+#java -mx5g -cp "${core_nlp_tool_path}/*" edu.stanford.nlp.pipeline.StanfordCoreNLP $* -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -filelist ${rsd_file_list} -outputDirectory ${core_nlp_output_path}
+python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp -u `stat -c "%u:%g" ./` zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
                                       --edl_path ${edl_cs} \
                                       --text_dir ${rsd_source} \

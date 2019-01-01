@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ######################################################
-# Arguments 
+# Arguments
 ######################################################
 # input root path
 data_root=data/test
@@ -14,9 +14,6 @@ rsd_source=${data_root}/rsd
 ltf_file_list=${data_root}/ltf_lst
 # file list of rsd files (absolute paths, this is a temporary file)
 rsd_file_list=${data_root}/rsd_lst
-
-# stanford toolbox
-core_nlp_tool_path=stanford-corenlp
 
 # edl output
 edl_output_dir=${data_root}/edl
@@ -63,7 +60,7 @@ event_raw_result_file=${event_result_dir}/events_raw.cs
 echo "Extracting entities and linking them to KB"
 python aida_edl/edl.py ${ltf_source} ${edl_output_dir}
 
-## Relation
+## Relation Extraction
 echo "Extracting relations"
 if [ -d "$relation_tmp_output_dir" ]
 then
@@ -107,7 +104,7 @@ echo "Extracting fillers and new relation types"
 
 readlink -f ${rsd_source}/* > ${rsd_file_list}
 
-java -mx5g -cp "${core_nlp_tool_path}/*" edu.stanford.nlp.pipeline.StanfordCoreNLP $* -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -filelist ${rsd_file_list} -outputDirectory ${core_nlp_output_path}
+python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
 
 docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
@@ -117,7 +114,7 @@ python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
                                       --relation_path ${new_relation_output_path} \
                                       --units_path aida_filler/units_clean.txt
 
-## Event
+## Event Extraction
 echo "Extracting events"
 
 ls ${ltf_source} > ${ltf_file_list}
@@ -129,3 +126,17 @@ python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${e
 echo "Merging all items"
 docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
 python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_with_time} -o ${final_output_file}
+
+## ColdStart Format to AIF Format
+echo "Generating AIF format"
+### Generating parameter file
+echo "inputKBFile: /AIDA-Interchange-Format-master/sample_params/"${final_output_file} > ${data_root}/rpi_params
+echo "baseURI: http://www.isi.edu/gaia" >> ${data_root}/rpi_params
+echo "systemURI: http://www.rpi.edu" >> ${data_root}/rpi_params
+echo "mode: SHATTER" >> ${data_root}/rpi_params
+echo "ontology: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/SeedlingOntology" >> ${data_root}/rpi_params
+echo "relationArgsFile: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/seedling_relation_args.csv" >> ${data_root}/rpi_params
+echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_root}"/ttl/" >> ${data_root}/rpi_params
+### Running converter
+docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
+./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/data/test/rpi_params
