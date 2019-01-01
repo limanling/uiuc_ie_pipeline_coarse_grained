@@ -15,7 +15,7 @@ Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie` 
 docker pull mongo
 docker pull panx27/edl
 docker pull elisarpi/elisa-ie
-docker pull zhangt13/aida_relation
+docker pull limanling/aida_relation
 docker pull zhangt13/aida_event
 docker pull limanling/aida_converter
 ```
@@ -28,18 +28,11 @@ cd ./aida_edl
 wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_edl_models.tgz
 tar -xvf aida_edl_models.tgz
 ```
-For relation extraction model:
-```bash
-cd ./aida_relation
-wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_relation_model.tgz
-wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_relation_patch.tgz
-tar -xvf aida_relation_model.tgz aida_relation_patch.tgz
-```
 
 ## Deployment
 Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~4) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
 
-Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300` and `5234`.
+Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300`, `5000`, `5234` and `9000`.
 
 Step 1. Start the EDL mongo database server
 
@@ -59,24 +52,31 @@ Step 3. Start the name tagger
 docker run --rm -p 3300:3300 --network="host" -v ${PWD}/aida_edl/models/:/usr/src/app/data/name_tagger/pytorch_models -ti elisarpi/elisa-ie /usr/src/app/lorelei_demo/run.py --preload --in_domain
 ```
 
-Step 4. Start the event extractor
+Step 4. Start the relation extractor
+
+This step will take a few minutes, you can proceed after you see "Serving Flask app "relation_backend"" message.
+```bash
+docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend.py
+```
+
+Step 5. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
 docker run -i -t --rm -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
 ```
 
-Step 5. Prepare Stanford CoreNLP
+Step 6. Prepare Stanford CoreNLP
 
 Download the latest Stanford CoreNLP and the English model file. Unzip the CoreNLP folder and put the model file into the folder. Please start the CoreNLP Server under the CoreNLP folder.
 
 ```bash
-nohup java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9001 -timeout 150000 -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json -lazy false &
+nohup java -mx5g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000 -timeout 150000 -annotators tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions -outputFormat json > corenlp.log 2>&1 &
 ```
 
 Please test the CoreNLP Server is running successfully:
 ```bash
-wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9001/?properties={"annotators":"tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions","outputFormat":"json"}'
+wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9000/?properties={"annotators":"tokenize,ssplit,pos,lemma,ner,regexner,depparse,entitymentions","outputFormat":"json"}'
 ```
 <!-- Run Stanford CoreNLP using Docker.
 ```bash

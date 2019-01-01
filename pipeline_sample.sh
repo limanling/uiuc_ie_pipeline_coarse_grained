@@ -12,8 +12,10 @@ ltf_source=${data_root}/ltf
 rsd_source=${data_root}/rsd
 # file list of ltf files (only file names)
 ltf_file_list=${data_root}/ltf_lst
+ls ${ltf_source} > ${ltf_file_list}
 # file list of rsd files (absolute paths, this is a temporary file)
 rsd_file_list=${data_root}/rsd_lst
+readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 # edl output
 edl_output_dir=${data_root}/edl
@@ -62,47 +64,27 @@ python aida_edl/edl.py ${ltf_source} ${edl_output_dir}
 
 ## Relation Extraction
 echo "Extracting relations"
+### Create folders
 if [ -d "$relation_tmp_output_dir" ]
 then
-    echo "\nThe output directory already exists, \n "$relation_tmp_output_dir"\n Please double check.\n"
+    echo "The output directory already exists, "$relation_tmp_output_dir". Please double check. "
 else
     mkdir -p $relation_tmp_output_dir
-    echo "\ncreated new dir: "$relation_tmp_output_dir" for new run.\nPlease make sure that the dir is correct!!!"
+    echo "Created new dir: "$relation_tmp_output_dir" for new run. Please make sure that the dir is correct!!!"
 fi
 
 if [ -d "$relation_result_dir" ]
 then
-    echo "\nThe output directory already exists, \n "$relation_result_dir"\n Please double check.\n"
+    echo "The output directory already exists, "$relation_result_dir". Please double check."
 else
     mkdir -p $relation_result_dir
-    echo "\ncreated new dir: "$relation_result_dir" for new run.\nPlease make sure that the dir is correct!!!"
+    echo "Created new dir: "$relation_result_dir" for new run. Please make sure that the dir is correct!!!"
 fi
+### Run relation extractir
+python aida_relation/gail_relation_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -o ${relation_result_dir}/${relation_cs_name}
 
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/aida2inter.py --ltf_data_path ${ltf_source} --edl_result_path ${edl_tab} \
---output_dir ${relation_tmp_output_dir}
-
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/feature_extraction_test.py --converted_fpath ${relation_tmp_output_dir}/AIDA_plain_text.txt \
---output_dir ${relation_tmp_output_dir} --dp_name ${dp_name}
-
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/eval_ere.py --eval_text_path ${eval_path} --dp_path ${dp_path} --eval_results_file ${eval_result}
-
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/use_patterns.py --eval_path ${relation_tmp_output_dir}
-
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/post_sponsor_test.py --eval_path ${relation_tmp_output_dir}
-
-docker run -it --rm -v $PWD:/tmp -w /tmp zhangt13/aida_relation \
-python aida_relation/utils/generate_CS_ere_sh.py --edl_cs ${edl_cs} --aida_plain_text ${relation_tmp_output_dir}/AIDA_plain_text.txt \
---aida_results ${relation_tmp_output_dir}/results_post_sponsor.txt --rel_cs ${relation_result_dir}/${relation_cs_name}
-
-## Fillers and new relation
+### Fillers and new relation
 echo "Extracting fillers and new relation types"
-
-readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
 
@@ -117,9 +99,16 @@ python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
 ## Event Extraction
 echo "Extracting events"
 
-ls ${ltf_source} > ${ltf_file_list}
-
-mkdir ${event_result_dir}
+### Create folders
+#mkdir ${event_result_dir}
+if [ -d "$event_result_dir" ]
+then
+    echo "The output directory already exists, "${event_result_dir}". Please double check."
+else
+    mkdir -p ${event_result_dir}
+    echo "Created new dir: "${event_result_dir}" for new run. Please make sure that the dir is correct!!!"
+fi
+### Run event extractor
 python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_output_path} -o ${event_result_file_with_time}
 
 ## Final Merge
@@ -140,3 +129,5 @@ echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_
 ### Running converter
 docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
 ./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/data/test/rpi_params
+
+echo "Final ttl result in "${data_root}"/ttl"
