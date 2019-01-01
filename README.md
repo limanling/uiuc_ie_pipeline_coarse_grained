@@ -1,5 +1,5 @@
 # RPI AIDA Pipeline
-One single script to run AIDA pipeline
+One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https://blender04.cs.rpi.edu/~lim22/aida_api/extraction.html).
 
 ## Prerequisites
 ### Packages to install
@@ -18,7 +18,6 @@ docker pull elisarpi/elisa-ie
 docker pull zhangt13/aida_relation
 docker pull zhangt13/aida_event
 docker pull limanling/aida_converter
-
 ```
 
 ### Download the latest models
