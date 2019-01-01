@@ -30,7 +30,7 @@ tar -xvf aida_edl_models.tgz
 ```
 
 ## Deployment
-Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~4) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
+Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~5) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
 
 Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300`, `5000`, `5234` and `9000`.
 
