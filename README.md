@@ -10,7 +10,7 @@ One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https:/
 Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
 ### Download the latest docker images
-Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie` and `zhangt13/aida_event`) or runtime environments (`zhangt13/aida_relation`).
+Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation` and `zhangt13/aida_event`) or runtime environments (`limanling/aida_converter`).
 ```bash
 docker pull mongo
 docker pull panx27/edl
