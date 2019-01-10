@@ -71,10 +71,10 @@ Step 6. Start the event coreference solution
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6000, 6100 and 6200 are for English, Russian and Ukrainian respectively.
 ```bash
-docker run -i -t --rm -w /event_coreference -p {6000, 6100, 6200}:{6000, 6100, 6200} dylandilu/event_coreference python aida_event_coreference_backen_{eng, rus, ukr}.py
+docker run -i -t --rm -w /event_coreference -p {6000,6100,6200}:{6000,6100,6200} dylandilu/event_coreference python aida_event_coreference_backen_{eng,rus,ukr}.py
 ```
 
-Step 6. Prepare Stanford CoreNLP
+Step 7. Prepare Stanford CoreNLP
 
 Download the latest Stanford CoreNLP and the English model file. Unzip the CoreNLP folder and put the model file into the folder. Please start the CoreNLP Server under the CoreNLP folder.
 
