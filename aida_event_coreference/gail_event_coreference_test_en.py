@@ -12,6 +12,8 @@ parser.add_argument('-i', '--event_cs', help='Event CS file path', required=True
 parser.add_argument('-o', '--output_path', help='Event Corference CS output file path', required=True)
 args = vars(parser.parse_args())
 
+input_event_cs_file_path = args['event_cs']
+output_event_coreference_output_file_path = args['output_path']
 
 temp_dict = dict()
 with open(input_event_cs_file_path) as f:
