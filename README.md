@@ -10,7 +10,7 @@ One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https:/
 Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
 ### Download the latest docker images
-Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `zhangt13/aida_event` and `dylandilu/event_coreference`) or runtime environments (`limanling/aida_converter`).
+Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `zhangt13/aida_event`,  `dylandilu/event_coreference`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
 ```bash
 docker pull mongo
 docker pull panx27/edl
@@ -19,6 +19,7 @@ docker pull limanling/aida_relation
 docker pull zhangt13/aida_event
 docker pull dylandilu/event_coreference
 docker pull limanling/aida_converter
+docker pull wangqy96/aida_nominal_coreference_en
 ```
 
 ### Download the latest models
@@ -48,33 +49,38 @@ Step 2. Start the EDL server
 docker run --rm -p 2201:2201 --link db:mongo panx27/edl python ./edl/api/web.py 2201
 ```
 
-Step 3. Start the name tagger
+Step 3. Start the nominal coreference server
+```bash
+docker run -i -t --rm -w /aida_nominal_coreference_en -p 2468:2468 wangqy96/aida_nominal_coreference_en python nominal_backend.py
+```
+
+Step 4. Start the name tagger
 ```bash
 docker run --rm -p 3300:3300 --network="host" -v ${PWD}/aida_edl/models/:/usr/src/app/data/name_tagger/pytorch_models -ti elisarpi/elisa-ie /usr/src/app/lorelei_demo/run.py --preload --in_domain
 ```
 
-Step 4. Start the relation extractor
+Step 5. Start the relation extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "relation_backend"" message.
 ```bash
 docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend.py
 ```
 
-Step 5. Start the event extractor
+Step 6. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
 docker run -i -t --rm -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
 ```
 
-Step 6. Start the event coreference solution
+Step 7. Start the event coreference solution
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6000, 6100 and 6200 are for English, Russian and Ukrainian respectively.
 ```bash
 docker run -i -t --rm -w /event_coreference -p {6000,6100,6200}:{6000,6100,6200} dylandilu/event_coreference python aida_event_coreference_backen_{eng,rus,ukr}.py
 ```
 
-Step 7. Prepare Stanford CoreNLP
+Step 8. Prepare Stanford CoreNLP
 
 Download the latest Stanford CoreNLP and the English model file. Unzip the CoreNLP folder and put the model file into the folder. Please start the CoreNLP Server under the CoreNLP folder.
 
