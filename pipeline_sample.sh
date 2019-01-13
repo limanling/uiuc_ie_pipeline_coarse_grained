@@ -42,7 +42,7 @@ final_output_file=${data_root}/en_full.cs
 ######################################################
 # Relation temporary files
 ######################################################
-relation_tmp_output_dir=aida_relation/temp  # intermediate file path
+relation_tmp_output_dir=${relation_result_dir}/temp  # intermediate file path
 dp_name=dp.pkl
 eval_path=${relation_tmp_output_dir}/AIDA_plain_text.txt
 eval_result=${relation_tmp_output_dir}/AIDA_results.txt
