@@ -34,6 +34,7 @@ new_relation_output_path=${relation_result_dir}/new_relation_en.cs
 # event output
 event_result_dir=${data_root}/event
 event_result_file_with_time=${event_result_dir}/events_tme.cs
+event_result_file_corefer=${event_result_dir}/events_corefer.cs
 
 # final output
 final_output_file=${data_root}/en_full.cs
@@ -111,10 +112,13 @@ fi
 ### Run event extractor
 python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_output_path} -o ${event_result_file_with_time}
 
+### Event coreference
+python aida_event_coreference/gail_event_coreference_test_en.py -i ${event_result_file_with_time} -o ${event_result_file_corefer}
+
 ## Final Merge
 echo "Merging all items"
 docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
-python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_with_time} -o ${final_output_file}
+python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
 
 ## ColdStart Format to AIF Format
 echo "Generating AIF format"
