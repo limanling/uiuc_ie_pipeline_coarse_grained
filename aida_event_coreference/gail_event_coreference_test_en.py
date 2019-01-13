@@ -20,7 +20,7 @@ with open(input_event_cs_file_path) as f:
 	temp_dict['event_cs'] = f.readlines()
 
 json_string = json.dumps(temp_dict)
-r = requests.post('http://127.0.0.1:6000/aida_event_coreference_ukr', json=json_string)
+r = requests.post('http://127.0.0.1:6000/aida_event_coreference_eng', json=json_string)
 if r.status_code == 200:
     print("Successfully extracted events")
     f = io.open(output_event_coreference_output_file_path, 'w')
