@@ -42,6 +42,7 @@ for one_line in open(input_cs_file):
     # throw_relation
     if ':Entity' in one_line_list[0] and ':Entity' in one_line_list[2]:
         # This is a relation line, skip
+
         continue
     if ':Entity' in one_line_list[0]:
         if one_line_list[0] not in entity_dict:
@@ -130,7 +131,10 @@ for one_entry in arc_dict:
     doc_id = arc_dict[one_entry][0][0]
     one_temp_line_list = list()
     event_type = trigger_mention_dict[one_entry][0]['type']
-    event_trigger_flag_name = T_flag_dict[one_entry]
+    try:
+        event_trigger_flag_name = T_flag_dict[one_entry]
+    except:
+        continue
     one_temp_line_list.append('%s:%s' % (event_type, event_trigger_flag_name))
     for one_item in arc_dict[one_entry]:
         role_name = one_item[2]
