@@ -138,4 +138,5 @@ echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_
 docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
 ./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
 
-echo "Final ttl result in "${data_root}"/ttl"
+echo "Final result in Cold Start Format is in "${data_root}"/en_full.cs"
+echo "Final result in Turtle Format is in "${data_root}"/ttl"
