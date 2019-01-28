@@ -29,6 +29,11 @@ For entity discovery and linking model:
 cd ./aida_edl
 wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_edl_models.tgz
 tar -xvf aida_edl_models.tgz
+cd ./models
+wget https://blender04.cs.rpi.edu/~zhangb8/lorelei/pytorch_models/en-nom.tar.gz
+wget https://blender04.cs.rpi.edu/~zhangb8/lorelei/pytorch_models/en-nom_weaveh.tar.gz
+tar -zxvf en-nom.tar.gz
+tar -zxvf en-nom_weaveh.tar.gz
 ```
 
 ## Deployment
@@ -77,7 +82,9 @@ Step 7. Start the event coreference solution
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6000, 6100 and 6200 are for English, Russian and Ukrainian respectively.
 ```bash
-docker run -i -t --rm -w /event_coreference -p {6000,6100,6200}:{6000,6100,6200} dylandilu/event_coreference python aida_event_coreference_backen_{eng,rus,ukr}.py
+docker run -i -t --rm -w /event_coreference -p 6000:6000 dylandilu/event_coreference python aida_event_coreference_backen_eng.py
+docker run -i -t --rm -w /event_coreference -p 6100:6100 dylandilu/event_coreference python aida_event_coreference_backen_rus.py
+docker run -i -t --rm -w /event_coreference -p 6200:6200 dylandilu/event_coreference python aida_event_coreference_backen_ukr.py
 ```
 
 Step 8. Prepare Stanford CoreNLP

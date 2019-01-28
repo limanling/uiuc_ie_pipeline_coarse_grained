@@ -68,6 +68,7 @@ for one_line in codecs.open(event_file_path, 'r', 'utf-8'):
     elif len(one_line_list) == 5 and 'mention' not in one_line_list[1]:
         one_line_list[1] = '%s%s' % (uri_head, one_line_list[1])
     new_line = '\t'.join(one_line_list)
+    new_line = new_line.replace('https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#', 'https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#')
     f_final.write('%s\n' % new_line)
 
 f_final.close()

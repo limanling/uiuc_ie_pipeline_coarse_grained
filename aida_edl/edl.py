@@ -2,11 +2,15 @@ import sys
 import os
 import requests
 import subprocess
+import nominal_corefer_en
+import json
+
 PWD=os.path.dirname(os.path.abspath(__file__))
 
-def edl(indir, outdir):
+def edl(indir, bio_path, outdir):
     try:
         os.mkdir(outdir)
+        print('mkdir ', outdir)
     except:
         pass
 
@@ -49,19 +53,30 @@ def edl(indir, outdir):
         '%s/*.ltf.xml.tab' % outdir,
     ]
     subprocess.call(' '.join(cmd), shell=True)
+
+    nominal_args = {}
+    nominal_args['dev'] = os.path.join('../', bio_path)
+    nominal_args['dev_e'] = '%s/../merged.tab' % outdir
+    nominal_args['out_e'] = '%s/../merged_corefer.tab' % outdir
+    json_string = json.dumps(nominal_args)
+    print(json_string)
+    nominal_corefer_en.get_nominal_corefer(json_string)
+
     cmd = [
         'python',
         '%s/tab2cs.py' % PWD,
-        '%s/merged.tab' % outdir,
+        '%s/merged_corefer.tab' % outdir,
         '%s/merged.cs' % outdir,
         'EDL'
     ]
     subprocess.call(' '.join(cmd), shell=True)
 
 if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print('USAGE: python <ltf input dir> <output dir>')
+    if len(sys.argv) != 4:
+        print(sys.argv)
+        print('USAGE: python <ltf input dir> <bio input dir> <output dir>')
         exit()
     indir = sys.argv[1]
-    outdir = sys.argv[2]
-    edl(indir, outdir)
+    bio_path = sys.argv[2]
+    outdir = sys.argv[3]
+    edl(indir, bio_path, outdir)
