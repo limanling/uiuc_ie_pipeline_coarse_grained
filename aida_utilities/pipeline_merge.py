@@ -60,8 +60,20 @@ for one_line in codecs.open(new_relation_file_path, 'r', 'utf-8'):
 
 
 # Event
+# After corerefence, sometimes they just connect togather, so if there are two :Event, split them
+lines=[]
 for one_line in codecs.open(event_file_path, 'r', 'utf-8'):
     one_line = one_line.strip()
+    if one_line.count(':Event') > 1:
+        second_event = one_line.find(':Event', 3) # get the index of the second :event
+        print(one_line[:second_event])
+        print(one_line[second_event:])
+        lines.append(one_line[:second_event])
+        lines.append(one_line[second_event:])
+    else:
+        lines.append(one_line)
+
+for one_line in lines:
     one_line_list = one_line.split('\t')
     if len(one_line_list) == 3 and one_line_list[1] == 'type':
         one_line_list[2] = '%s%s' % (uri_head, one_line_list[2])

@@ -3,11 +3,11 @@ import argparse
 from collections import defaultdict
 
 parser = argparse.ArgumentParser(description='Convert the visualization to brat file')
-parser.add_argument('-i', '--input_file_path', help='Input file path', required=True)
+parser.add_argument('-i', '--input_anno_file', help='Input file path', required=True)
 parser.add_argument('-o', '--output_folder_path', help='Output folder path', required=True)
 args = vars(parser.parse_args())
 
-input_cs_file = args['input_file_path']
+input_anno_file = args['input_anno_file']
 output_brat_folder = args['output_folder_path']
 
 try:
@@ -34,12 +34,14 @@ trigger_mention_dict = dict()
 # arc_dict = dict()
 arc_dict = defaultdict(lambda: defaultdict(str))
 # T_flag_dict = dict()
+# for ent: T_flag_dict[ent_id][doc_id][flag_name] = int(start_offset)
+# for evt: T_flag_dict[evt_men_id][doc_id][flag_name] = int(start_offset)
 T_flag_dict = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
 
 # entity
 # P103_ent_mentions.tab
 # tree_id	entitymention_id	entity_id	provenance	textoffset_startchar	textoffset_endchar	text_string	justification	type	level	kb_id
-ent_mentions_file = 'data/LDCeval_201901/LDCanno/P103/P103_ent_mentions.tab'
+ent_mentions_file = os.path.join(input_anno_file, 'P103_ent_mentions.tab')
 ent_men_dict = {}
 for one_line in open(ent_mentions_file):
     one_line = one_line.strip('\n')
@@ -87,7 +89,7 @@ for one_line in open(ent_mentions_file):
 # Trigger
 # P103_evt_mentions.tab
 # tree_id	eventmention_id	event_id	provenance	textoffset_startchar	textoffset_endchar	text_string	justification	type	subtype	attribute	attribute2	start_date_type	start_date	end_date_type	end_date	kb_id	political_status
-evt_mentions_file = 'data/LDCeval_201901/LDCanno/P103/P103_evt_mentions.tab'
+evt_mentions_file = os.path.join(input_anno_file, 'P103_evt_mentions.tab')
 evt_men_doc = {}
 evt_type_dict = {}
 for one_line in open(evt_mentions_file):
@@ -121,30 +123,20 @@ for one_line in open(evt_mentions_file):
 # Argument
 # P103_evt_slots.tab
 # tree_id	eventmention_id	slot_type	attribute	arg_id
-evt_slot_file = 'data/LDCeval_201901/LDCanno/P103/P103_evt_slots.tab'
+evt_slot_file = os.path.join(input_anno_file, 'P103_evt_slots.tab')
 for one_line in open(evt_slot_file):
     one_line = one_line.strip('\n')
     strs = one_line.split('\t')
     evt_men = strs[1]  # event mention
     try:
-        doc_id = evt_men_doc[evt_men]
+        doc_id = evt_men_doc[evt_men] # no start and end
     except:
         continue
-    # one_temp_line_list = list()
 
+    # for ent: T_flag_dict[ent_id][doc_id][flag_name] = int(start_offset)
+    # for evt: T_flag_dict[evt_men_id][doc_id][flag_name] = int(start_offset)
     for _ in T_flag_dict[evt_men][doc_id]:
         event_trigger_flag_offset = T_flag_dict[evt_men][doc_id][_]
-    # event_trigger_flag_name = T_flag_dict[evt_men][doc_id].keys()[0]#
-    # print()# [0][0]  # first, key
-    # event_trigger_flag_offset = T_flag_dict[evt_men][doc_id][1] #[0][1]
-    # print(event_trigger_flag_name)
-    # print(event_trigger_flag_offset)
-    # print('------------')
-    # one_temp_line_list.append('%s:%s' % (event_type, event_trigger_flag_name))
-    # for one_item in arc_dict[one_entry]:
-    #     role_name = one_item[2]
-    #     argument_flag_name = T_flag_dict[one_item[3]]
-    #     one_temp_line_list.append('%s:%s' % (role_name, argument_flag_name))
     role_name = strs[2]
     argument_flag_dict = {}
     for ent_flag in T_flag_dict[strs[4]][doc_id]:
@@ -153,11 +145,11 @@ for one_line in open(evt_slot_file):
         argument_flag_dict[ent_flag] = offset
     # print(argument_flag_dict)
     argument_flag_name = sorted(argument_flag_dict, key=lambda x: len(x[1]), reverse=False) #[0][0]
+    arc_dict[evt_men][role_name] = argument_flag_name
     # print(argument_flag_dict)
-    # print(argument_flag_name)
-    # arc_dict[evt_men][role_name] = argument_flag_name
-    # print('=============')
+    # print('-------------------')
 
+print(arc_dict)
 for evt_men in arc_dict:
     one_temp_line_list = list()
     event_type = evt_type_dict[evt_men]
