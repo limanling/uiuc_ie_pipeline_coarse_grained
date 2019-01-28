@@ -19,7 +19,9 @@ readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 # edl output
 edl_output_dir=${data_root}/edl
-edl_tab=${edl_output_dir}/merged.tab
+edl_bio=${edl_output_dir}/en.bio
+edl_tab_nocorefer=${edl_output_dir}/merged.tab
+edl_tab=${edl_output_dir}/merged_corefer.tab
 edl_cs=${edl_output_dir}/merged.cs
 
 # filler output
@@ -61,7 +63,9 @@ event_raw_result_file=${event_result_dir}/events_raw.cs
 ######################################################
 ## EDL
 echo "Extracting entities and linking them to KB"
-python aida_edl/edl.py ${ltf_source} ${edl_output_dir}
+mkdir -p ${edl_output_dir}
+python aida_utilities/ltf2bio.py ${ltf_source} ${edl_bio}
+python aida_edl/edl.py ${ltf_source} ${edl_bio} ${edl_output_dir}
 
 ## Relation Extraction
 echo "Extracting relations"
@@ -132,6 +136,6 @@ echo "relationArgsFile: /AIDA-Interchange-Format-master/src/main/resources/edu/i
 echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_root}"/ttl/" >> ${data_root}/rpi_params
 ### Running converter
 docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
-./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/data/test/rpi_params
+./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
 
 echo "Final ttl result in "${data_root}"/ttl"
