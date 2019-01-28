@@ -4,6 +4,7 @@ import requests
 import subprocess
 import nominal_corefer_en
 import json
+import nom_fix
 
 PWD=os.path.dirname(os.path.abspath(__file__))
 
@@ -42,6 +43,7 @@ def edl(indir, bio_path, outdir):
             tab = open('%s/%s' % (outdir, i), 'r').read()
             if not tab:
                 continue
+            tab = nom_fix.fix_nom(tab)
             fw.write(tab)
             # docid = i.replace('.ltf.xml.tab', '')
             # with open('%s/%s' % (outdir, i), 'r') as f:
