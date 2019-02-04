@@ -108,8 +108,8 @@ wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9000
 
 ## Run the codes
 * Make sure you have RSD (Raw Source Data, ending with `*.rsd.txt`) and LTF (Logical Text Format, ending with `*.ltf.xml`) files. 
-	* If you have RSD files, please use the aida_utilities/rsd2ltf.py to generate the LTF files. 
-	* If you have LTF files, please use the AIDA ltf2rsd tool (LDC2018E62_AIDA_Month_9_Pilot_Eval_Corpus_V1.0/tools/ltf2txt/ltf2rsd.perl) to generate the RSD files. 
+	* If you have RSD files, please use the `aida_utilities/rsd2ltf.py` to generate the LTF files. 
+	* If you have LTF files, please use the AIDA ltf2rsd tool (`LDC2018E62_AIDA_Month_9_Pilot_Eval_Corpus_V1.0/tools/ltf2txt/ltf2rsd.perl`) to generate the RSD files. 
 * Edit the `pipeline_sample.sh` for your run, including `data_root` containing a subfolder `ltf` with your input LTF files and a subfolder `rsd` with your input RSD files. Then run the shell file. For example.
 ```bash
 sh pipeline_sample.sh
