@@ -54,21 +54,16 @@ def edl(indir, bio_path, outdir):
     ]
     subprocess.call(' '.join(cmd), shell=True)
 
-    # nominal_args = {}
-    # nominal_args['dev'] = bio_path
-    # nominal_args['dev_e'] = '%s/merged.tab' % outdir
-    # nominal_args['out_e'] = '%s/merged_corefer.tab' % outdir
-    # json_string = json.dumps(nominal_args)
-    # print(json_string)
-    dev = bio_path
-    dev_e = '%s/merged.tab' % outdir
-    out_e = '%s/merged_corefer.tab' % outdir
-    nominal_corefer_en.get_nominal_corefer(dev, dev_e, out_e)
+    # dev = bio_path
+    # dev_e = '%s/merged.tab' % outdir
+    # out_e = '%s/merged_corefer.tab' % outdir
+    # nominal_corefer_en.get_nominal_corefer(dev, dev_e, out_e)
 
     cmd = [
         'python',
         '%s/tab2cs.py' % PWD,
-        '%s/merged_corefer.tab' % outdir,
+        # '%s/merged_corefer.tab' % outdir,
+        '%s/merged.tab' % outdir,
         '%s/merged.cs' % outdir,
         'EDL'
     ]
