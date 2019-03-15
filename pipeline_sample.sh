@@ -4,7 +4,7 @@
 # Arguments
 ######################################################
 # input root path
-data_root=data/test
+data_root=$1
 
 # ltf source folder path
 ltf_source=${data_root}/ltf
@@ -20,9 +20,9 @@ readlink -f ${rsd_source}/* > ${rsd_file_list}
 # edl output
 edl_output_dir=${data_root}/edl
 edl_bio=${edl_output_dir}/en.bio
-#edl_tab_nocorefer=${edl_output_dir}/merged.tab
-#edl_tab=${edl_output_dir}/merged_corefer.tab
-edl_tab=${edl_output_dir}/merged.tab
+edl_tab_nocorefer=${edl_output_dir}/merged.tab
+edl_tab=${edl_output_dir}/merged_corefer.tab
+#edl_tab=${edl_output_dir}/merged.tab
 edl_cs=${edl_output_dir}/merged.cs
 
 # filler output
