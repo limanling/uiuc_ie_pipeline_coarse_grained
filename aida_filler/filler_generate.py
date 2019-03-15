@@ -1,6 +1,8 @@
 import os
 import json
 import argparse
+# import io
+import codecs
 
 def load_unit_gaz(units_path):
     gaz = set()
@@ -214,9 +216,12 @@ def read_edl(edl_path):
     edl_dict = {}
     edl_type_dict = {}
 
-    with open(edl_path, encoding='utf-8') as f:
-        lines = f.readlines()
-    for line in lines:
+    # with open(edl_path, encoding='utf-8') as f:
+    #     lines = f.readlines()
+    # for line in lines:
+    print(edl_path)
+    # for line in io.open(edl_path, encoding='utf-8'):
+    for line in codecs.open(edl_path, 'r', 'utf-8'):
         if len(line.strip().split('\t')) < 3:
             continue
         if line.strip().split('\t')[1] == 'type':

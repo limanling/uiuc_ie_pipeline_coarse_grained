@@ -39,31 +39,32 @@ def edl(indir, bio_path, outdir):
         for i in os.listdir(outdir):
             if not i.endswith('.ltf.xml.tab'):
                 continue
-            tab = open('%s/%s' % (outdir, i), 'r').read()
-            if not tab:
-                continue
-            fw.write(tab)
+            # tab = open('%s/%s' % (outdir, i), 'r').read()
+            # if not tab:
+            #     continue
+            # fw.write(tab)
             # docid = i.replace('.ltf.xml.tab', '')
-            # with open('%s/%s' % (outdir, i), 'r') as f:
-            #     for line in f:
-            #         tmp = line.rstrip('\n').split('\t')
-            #         fw.write('%s\n' % '\t'.join(tmp))
+            with open('%s/%s' % (outdir, i), 'r') as f:
+                for line in f:
+                    tmp = line.rstrip('\n').split('\t')
+                    if len(tmp) > 3:
+                        fw.write('%s\n' % '\t'.join(tmp))
     cmd = [
         'rm',
         '%s/*.ltf.xml.tab' % outdir,
     ]
     subprocess.call(' '.join(cmd), shell=True)
 
-    # dev = bio_path
-    # dev_e = '%s/merged.tab' % outdir
-    # out_e = '%s/merged_corefer.tab' % outdir
-    # nominal_corefer_en.get_nominal_corefer(dev, dev_e, out_e)
+    dev = bio_path
+    dev_e = '%s/merged.tab' % outdir
+    out_e = '%s/merged_corefer.tab' % outdir
+    nominal_corefer_en.get_nominal_corefer(dev, dev_e, out_e)
 
     cmd = [
         'python',
         '%s/tab2cs.py' % PWD,
-        # '%s/merged_corefer.tab' % outdir,
-        '%s/merged.tab' % outdir,
+        '%s/merged_corefer.tab' % outdir,
+        # '%s/merged.tab' % outdir,
         '%s/merged.cs' % outdir,
         'EDL'
     ]

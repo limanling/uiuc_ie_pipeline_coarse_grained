@@ -92,9 +92,7 @@ if __name__ == "__main__":
 
     res = []
     for i, filepath in enumerate(ltf_fp):
-
         assert os.path.exists(filepath)
-
         ltf_str = codecs.open(filepath, 'r', 'utf-8').read()
         bio_str = ltf2bio(ltf_str)
         if separate_output:

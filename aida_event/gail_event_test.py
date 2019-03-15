@@ -34,9 +34,13 @@ temp_dict['filler_cs'] = io.open(input_filler_cs_file_path, encoding='utf-8').re
 temp_dict['input'] = dict()
 for one_line in io.open(input_file_list_file_path):
     one_line = one_line.strip()
-    temp_dict['input'][one_line] = dict()
     one_ltf_xml_file_path = os.path.join(input_ltf_folder_path, one_line)
-    temp_dict['input'][one_line]['ltf'] = io.open(one_ltf_xml_file_path).read()
+    ltf_content = io.open(one_ltf_xml_file_path).read()
+    if '<TEXT/>' in ltf_content:
+        # No text content
+        continue
+    temp_dict['input'][one_line] = dict()
+    temp_dict['input'][one_line]['ltf'] = ltf_content
 
 json_string = json.dumps(temp_dict)
 r = requests.post('http://127.0.0.1:5234/aida_event_en_imitation', json=json_string)
