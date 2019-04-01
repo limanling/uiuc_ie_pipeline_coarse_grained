@@ -68,9 +68,7 @@ Step 5. Start the relation extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "relation_backend"" message.
 ```bash
-docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend_en.py
-docker run -i -t --rm -w /aida_relation -p 5100:5100 limanling/aida_relation python relation_backend_ru.py
-docker run -i -t --rm -w /aida_relation -p 5200:5200 limanling/aida_relation python relation_backend_uk.py
+docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend.py
 ```
 
 Step 6. Start the event extractor
@@ -85,8 +83,6 @@ Step 7. Start the event coreference solution
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6000, 6100 and 6200 are for English, Russian and Ukrainian respectively.
 ```bash
 docker run -i -t --rm -w /event_coreference -p 6000:6000 dylandilu/event_coreference python aida_event_coreference_backen_eng.py
-docker run -i -t --rm -w /event_coreference -p 6100:6100 dylandilu/event_coreference python aida_event_coreference_backen_rus.py
-docker run -i -t --rm -w /event_coreference -p 6200:6200 dylandilu/event_coreference python aida_event_coreference_backen_ukr.py
 ```
 
 Step 8. Prepare Stanford CoreNLP
