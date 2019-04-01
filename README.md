@@ -5,7 +5,7 @@ One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https:/
 ### Packages to install
 1. Docker
 2. Java
-3. Python=2.7 with requests, jieba, nltk package installed (As most Linux distros deliver by default)
+3. Python=2.7 with requests, jieba, nltk, langdetect package installed
 
 Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
@@ -68,7 +68,9 @@ Step 5. Start the relation extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "relation_backend"" message.
 ```bash
-docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend.py
+docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend_en.py
+docker run -i -t --rm -w /aida_relation -p 5100:5100 limanling/aida_relation python relation_backend_ru.py
+docker run -i -t --rm -w /aida_relation -p 5200:5200 limanling/aida_relation python relation_backend_uk.py
 ```
 
 Step 6. Start the event extractor
