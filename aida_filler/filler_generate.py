@@ -34,9 +34,9 @@ def single_generate(corenlp_dir, output_dir):
                 if ner == 'DATE':
 
                     print(text, characterOffsetBegin, characterOffsetEnd)
-                filler_id = ':Filler_ENG_%s'%(format(index, '07d'))
+                filler_id = ':Entity_Filler_ENG_%s'%(format(index, '07d'))
                 filler_type = 'TME'
-                filler_offset = doc.split('.')[0]+':'+'-'.join([characterOffsetBegin,characterOffsetEnd])
+                filler_offset = doc_name+':'+'-'.join([characterOffsetBegin,characterOffsetEnd])
                 confidence = 1.000
                 f_out.write('%s\ttype\tTME\n'%filler_id)
                 f_out.write('%s\t%s\t%s\t%s\t%s\n'%(filler_id, 'mention','"'+text+'"', filler_offset, confidence))
@@ -55,29 +55,30 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
     relation_dict = {}
     edl_filter_dict = {}
     for doc in os.listdir(corenlp_dir):
-
+        doc_name = doc.replace(".rsd.txt.json", "")
+        print(doc_name)
         article = ''
-        if doc.split('.')[0] in edl_dict:
-            edl_list = edl_dict[doc.split('.')[0]]
+        if doc_name in edl_dict:
+            edl_list = edl_dict[doc_name]
         else:
             edl_list = {}
-        relation_dict[doc.split('.')[0]] = []
-        edl_filter_dict[doc.split('.')[0]] = []
-        text_path = os.path.join(text_dir, doc.split('.')[0] + '.rsd.txt')
+        relation_dict[doc_name] = []
+        edl_filter_dict[doc_name] = []
+        text_path = os.path.join(text_dir, doc_name + '.rsd.txt')
         with open(text_path, encoding='utf-8') as f:
             article = f.read()
-        text_dict[doc.split('.')[0]] = article
+        text_dict[doc_name] = article
 
         with open(os.path.join(corenlp_dir,doc), encoding='utf-8') as f:
             content = f.read()
-        if doc.split('.')[0] not in filler_dict:
+        if doc_name not in filler_dict:
 
-            filler_dict[doc.split('.')[0]] = {}
-            filler_dict[doc.split('.')[0]]['URL'] = []
-            filler_dict[doc.split('.')[0]]['TME'] = []
-            filler_dict[doc.split('.')[0]]['MON'] = []
-            filler_dict[doc.split('.')[0]]['TTL'] = []
-            filler_dict[doc.split('.')[0]]['VAL'] = []
+            filler_dict[doc_name] = {}
+            filler_dict[doc_name]['URL'] = []
+            filler_dict[doc_name]['TME'] = []
+            filler_dict[doc_name]['MON'] = []
+            filler_dict[doc_name]['TTL'] = []
+            filler_dict[doc_name]['VAL'] = []
         json_f = json.loads(content)
         
         for sentence in json_f['sentences']:
@@ -104,7 +105,7 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
             sentence_start = int(token_list[0][1])
             sentence_end = int(token_list[0][2])-1
 
-            provenance = doc.split('.')[0]+':'+str(token_list[0][1])+'-'+str(token_list[-1][2]-1)
+            provenance = doc_name+':'+str(token_list[0][1])+'-'+str(token_list[-1][2]-1)
             for entitymention in sentence['entitymentions']:
                 ner = entitymention['ner']
                 if ner not in ner_cache:
@@ -122,7 +123,7 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
                         norm_text = entitymention['normalizedNER']
                     except:
                         norm_text = text
-                    filler_dict[doc.split('.')[0]]['TME'].append([[text,norm_text], characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_dict[doc_name]['TME'].append([[text,norm_text], characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
                     filler_index += 1
                 elif ner == 'TIME':
                     try:
@@ -130,29 +131,29 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
                     except:
                         norm_text = text
 
-                    filler_dict[doc.split('.')[0]]['TME'].append([[text,norm_text], characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_dict[doc_name]['TME'].append([[text,norm_text], characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
                     filler_index += 1
                     
                 #elif ner == 'DURATION':
                 #    if index_end <len(token_list):
                 #        print([text+' '+token_list[index_end][0], characterOffsetBegin, token_list[index_end][2]],doc)
                 elif ner == 'URL':
-                    filler_dict[doc.split('.')[0]]['URL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
-                    filler_id = ':Filler_ENG_%s'%(format(filler_index, '07d'))
+                    filler_dict[doc_name]['URL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_id = ':Entity_Filler_ENG_%s'%(format(filler_index, '07d'))
                     filler_index += 1
                     if 'ORG' in edl_list:
                         for onename in edl_list['ORG']:
                             
                             if (int(onename.split('-')[0]) <= int(characterOffsetBegin) and int(characterOffsetBegin) <= int(onename.split('-')[1])) or (int(characterOffsetBegin)<=int(onename.split('-')[0]) and int(onename.split('-')[0]) <= int(characterOffsetEnd)):
-                                edl_filter_dict[doc.split('.')[0]].append(onename)
-                                relation_dict[doc.split('.')[0]].append([edl_list['ORG'][onename][-1], 'GeneralAffiliation.OrganizationWebsite', filler_id, provenance])
+                                edl_filter_dict[doc_name].append(onename)
+                                relation_dict[doc_name].append([edl_list['ORG'][onename][-1], 'GeneralAffiliation.OrganizationWebsite', filler_id, provenance])
 #                                print(' '.join(token_text_list))
 #                                print('General-Affiliation.Organization-Website: %s\t%s\n'%(edl_list['ORG'][onename][0], text))
                                 #print('%s\thttps://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#GenAfl.OrgWeb\t%s\t1.0'%(edl_list['ORG'][onename][-1], filler_id ))
                             elif int(onename.split('-')[0]) >= sentence_start and int(onename.split('-')[1]) <= sentence_end:
 #                                print(' '.join(token_text_list))
 #                                print('General-Affiliation.Organization-Website: %s\t%s\n'%(edl_list['ORG'][onename][0], text))
-                                relation_dict[doc.split('.')[0]].append([edl_list['ORG'][onename][-1], 'GeneralAffiliation.OrganizationWebsite', filler_id, provenance])
+                                relation_dict[doc_name].append([edl_list['ORG'][onename][-1], 'GeneralAffiliation.OrganizationWebsite', filler_id, provenance])
 #                                print('%s\thttps://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#GenAfl.OrgWeb\t%s\t1.0'%(edl_list['ORG'][onename][-1], filler_id ))
                 elif ner == 'NUMBER':
                     flag_filter = False
@@ -163,11 +164,11 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
                     if flag_filter == True:
                         continue
 
-                    #filler_dict[doc.split('.')[0]]['NUMBER'].append([text, characterOffsetBegin, characterOffsetEnd, filler_index])
+                    #filler_dict[doc_name]['NUMBER'].append([text, characterOffsetBegin, characterOffsetEnd, filler_index])
                     
                     
-                    filler_dict[doc.split('.')[0]]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
-                    filler_id = ':Filler_ENG_%s'%(format(filler_index, '07d'))
+                    filler_dict[doc_name]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_id = ':Entity_Filler_ENG_%s'%(format(filler_index, '07d'))
                     val_flag = False
                     if index_end <len(token_list):
 
@@ -178,10 +179,10 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
                             for onename in edl_list[ner_type]:
                                 
                                 if (int(onename.split('-')[0]) - int(characterOffsetEnd)  <= 2) and (int(onename.split('-')[0]) -int(characterOffsetEnd) > 0):
-                                    relation_dict[doc.split('.')[0]].append([filler_id, 'Measurement.Count', edl_list[ner_type][onename][-1], provenance])
+                                    relation_dict[doc_name].append([filler_id, 'Measurement.Count', edl_list[ner_type][onename][-1], provenance])
 #                                    print(' '.join(token_text_list))
 #                                    print('Measurement.Count: %s\t%s\n'%(text, edl_list[ner_type][onename][0]))
-                                    ######filler_dict[doc.split('.')[0]]['VAL'].append([text+' '+token_list[index_end][0], characterOffsetBegin, token_list[index_end][2]])
+                                    ######filler_dict[doc_name]['VAL'].append([text+' '+token_list[index_end][0], characterOffsetBegin, token_list[index_end][2]])
                                     #print('%s\thttps://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#Measurement.Count\t%s\t1.0'%(edl_list[ner_type][onename][-1], filler_id ))
                                     #print([text+' '+edl_list['VEH'][onename][0], characterOffsetBegin, token_list[index_end][2]])
                                     ###print(doc, ner_type, text, edl_list[ner_type][onename][0],'|||', article[int(characterOffsetBegin): int(onename.split('-')[1])+1])
@@ -189,25 +190,25 @@ def whole_generate(corenlp_dir, text_dir, unit_gaz, edl_dict):
                         for one_unit in unit_gaz:
                             if token_list[index_end][0].lower() == one_unit.lower():
                                 #print(text,token_list[index_end][0], one_unit)
-                                filler_dict[doc.split('.')[0]]['VAL'].append([text, characterOffsetBegin, token_list[index_end][2]-1, format(filler_index, '07d') ])
-                                ######filler_dict[doc.split('.')[0]]['VAL'].append([text+' '+token_list[index_end][0], characterOffsetBegin, token_list[index_end][2]])
+                                filler_dict[doc_name]['VAL'].append([text, characterOffsetBegin, token_list[index_end][2]-1, format(filler_index, '07d') ])
+                                ######filler_dict[doc_name]['VAL'].append([text+' '+token_list[index_end][0], characterOffsetBegin, token_list[index_end][2]])
                                 val_flag = True
                                 continue
                     if val_flag == False:
-                        filler_dict[doc.split('.')[0]]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d') ])
+                        filler_dict[doc_name]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d') ])
                                                                             
                     filler_index += 1
                             
                 elif ner == 'MONEY':
-                    filler_dict[doc.split('.')[0]]['MON'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_dict[doc_name]['MON'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
                     filler_index += 1
 
                 elif ner == 'PERCENT':
                     #print(text, characterOffsetBegin, characterOffsetEnd)
-                    filler_dict[doc.split('.')[0]]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_dict[doc_name]['VAL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
                     filler_index += 1
                 elif ner == 'TITLE':
-                    filler_dict[doc.split('.')[0]]['TTL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
+                    filler_dict[doc_name]['TTL'].append([text, characterOffsetBegin, characterOffsetEnd, format(filler_index, '07d')])
                     filler_index += 1
 
     return filler_dict, edl_filter_dict, relation_dict
@@ -260,14 +261,14 @@ if __name__ == '__main__':
             for one_filler in filler_dict[doc][filler_type]:
 
                 if filler_type == 'TME':
-                    f_filler.write(':Filler_ENG_%s\ttype\t%s\n'%(one_filler[3], filler_type))
-                    f_filler.write(':Filler_ENG_%s\tcanonical_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
-                    f_filler.write(':Filler_ENG_%s\tmention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
-                    f_filler.write(':Filler_ENG_%s\tnormalized_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][1]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
+                    f_filler.write(':Entity_Filler_ENG_%s\ttype\t%s\n'%(one_filler[3], filler_type))
+                    f_filler.write(':Entity_Filler_ENG_%s\tcanonical_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
+                    f_filler.write(':Entity_Filler_ENG_%s\tmention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
+                    f_filler.write(':Entity_Filler_ENG_%s\tnormalized_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0][1]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
                 else:
-                    f_filler.write(':Filler_ENG_%s\ttype\t%s\n'%(one_filler[3], filler_type))
-                    f_filler.write(':Filler_ENG_%s\tcanonical_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
-                    f_filler.write(':Filler_ENG_%s\tmention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
+                    f_filler.write(':Entity_Filler_ENG_%s\ttype\t%s\n'%(one_filler[3], filler_type))
+                    f_filler.write(':Entity_Filler_ENG_%s\tcanonical_mention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
+                    f_filler.write(':Entity_Filler_ENG_%s\tmention\t%s\t%s\t1.0\n'%(one_filler[3], '"'+one_filler[0]+'"', doc+':'+str(one_filler[1])+'-'+str(one_filler[2])))
     f_filler.close()
 
 
