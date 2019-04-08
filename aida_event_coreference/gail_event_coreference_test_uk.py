@@ -10,6 +10,9 @@ import io
 parser = argparse.ArgumentParser(description='Call the aida event coreference API acquire output')
 parser.add_argument('-i', '--event_cs', help='Event CS file path', required=True)
 parser.add_argument('-o', '--output_path', help='Event Corference CS output file path', required=True)
+parser.add_argument('-r', '--rsd_dir', help='path to dir of rsd files')
+parser.add_argument('-x', '--xdoc', default = False, action='store_true', help='switch for cross document coreference')
+parser.add_argument('-n', '--doc_per_doc', default = 100 ,help='number of documents for each topic')
 args = vars(parser.parse_args())
 
 input_event_cs_file_path = args['event_cs']
@@ -18,9 +21,12 @@ output_event_coreference_output_file_path = args['output_path']
 temp_dict = dict()
 with open(input_event_cs_file_path) as f:
 	temp_dict['event_cs'] = f.readlines()
+temp_dict['xdoc'] = args['xdoc']
+temp_dict['rsd_dir'] = args['rsd_dir']
+temp_dict['doc_per_doc'] = args['doc_per_doc']
 
 json_string = json.dumps(temp_dict)
-r = requests.post('http://127.0.0.1:6200/aida_event_coreference_ukr', json=json_string)
+r = requests.post('http://127.0.0.1:6201/aida_event_coreference_ukr', json=json_string)
 if r.status_code == 200:
     print("Successfully extracted events")
     f = io.open(output_event_coreference_output_file_path, 'w')
