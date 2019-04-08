@@ -10,14 +10,14 @@ One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https:/
 Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
 ### Download the latest docker images
-Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `zhangt13/aida_event`,  `dylandilu/event_coreference`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
+Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `zhangt13/aida_event`,  `dylandilu/event_coreference_xdoc`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
 ```bash
 docker pull mongo
 docker pull panx27/edl
 docker pull elisarpi/elisa-ie
 docker pull limanling/aida_relation
 docker pull zhangt13/aida_event
-docker pull dylandilu/event_coreference
+docker pull dylandilu/event_coreference_xdoc
 docker pull limanling/aida_converter
 docker pull wangqy96/aida_nominal_coreference_en
 ```
@@ -39,7 +39,7 @@ tar -zxvf en-nom_weaveh.tar.gz
 ## Deployment
 Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~5) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
 
-Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300`, `5000`, `5234`, `9000`, `6000`, `6100` and `6200`.
+Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300`, `5000`, `5234`, `9000`, `6001`, `6101` and `6201`.
 
 Step 1. Start the EDL mongo database server
 
@@ -80,9 +80,9 @@ docker run -i -t --rm -w /aida_event -p 5234:5234 zhangt13/aida_event python gai
 
 Step 7. Start the event coreference solution
 
-This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6000, 6100 and 6200 are for English, Russian and Ukrainian respectively.
+This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6001, 6101 and 6201 are for English, Russian and Ukrainian respectively.
 ```bash
-docker run -i -t --rm -w /event_coreference -p 6000:6000 dylandilu/event_coreference python aida_event_coreference_backen_eng.py
+docker run -i -t --rm -w /event_coreference -p 6001:6001 dylandilu/event_coreference_xdoc python aida_event_coreference_backen_eng.py
 ```
 
 Step 8. Prepare Stanford CoreNLP
