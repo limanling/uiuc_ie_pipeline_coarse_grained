@@ -2,7 +2,7 @@ import requests
 import os
 import json
 import argparse
-import io
+import codecs
 
 # input_event_cs_file_path = 'uk_events_eval.cs'
 # output_event_coreference_output_file_path = 'test_test.cs'
@@ -19,7 +19,7 @@ input_event_cs_file_path = args['event_cs']
 output_event_coreference_output_file_path = args['output_path']
 
 temp_dict = dict()
-with open(input_event_cs_file_path) as f:
+with codecs.open(input_event_cs_file_path, 'r', 'utf-8') as f:
 	temp_dict['event_cs'] = f.readlines()
 
 temp_dict['xdoc'] = args['xdoc']
@@ -30,7 +30,7 @@ json_string = json.dumps(temp_dict)
 r = requests.post('http://127.0.0.1:6001/aida_event_coreference_eng', json=json_string)
 if r.status_code == 200:
     print("Successfully extracted events")
-    f = io.open(output_event_coreference_output_file_path, 'w')
+    f = codecs.open(output_event_coreference_output_file_path, 'w', 'utf-8')
     f.write(r.text)
     f.close()
 else:

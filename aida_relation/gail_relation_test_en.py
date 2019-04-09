@@ -2,7 +2,7 @@ import requests
 import os
 import json
 import argparse
-import io
+import codecs
 
 
 parser = argparse.ArgumentParser(description='Call the aida relation API acquire output')
@@ -20,14 +20,14 @@ input_edl_tab_file_path = args['edl_tab']
 output_relation_output_file_path = args['output_path']
 
 temp_dict = dict()
-temp_dict['edl_cs'] = io.open(input_edl_cs_file_path, encoding='utf-8').read().strip("\n")
-temp_dict['edl_tab'] = io.open(input_edl_tab_file_path, encoding='utf-8').read().strip("\n")
+temp_dict['edl_cs'] = codecs.open(input_edl_cs_file_path, 'r', 'utf-8').read().strip("\n")
+temp_dict['edl_tab'] = codecs.open(input_edl_tab_file_path, 'r', 'utf-8').read().strip("\n")
 temp_dict['input'] = dict()
-for one_line in io.open(input_file_list_file_path):
+for one_line in codecs.open(input_file_list_file_path, 'r', 'utf-8'):
     one_line = one_line.strip()
     base_name = one_line.replace(".ltf.xml", "")
     one_ltf_xml_file_path = os.path.join(input_ltf_folder_path, one_line)
-    temp_dict['input'][base_name] = io.open(one_ltf_xml_file_path, encoding="utf-8").read()
+    temp_dict['input'][base_name] = codecs.open(one_ltf_xml_file_path, 'r', 'utf-8').read()
 
 json_string = json.dumps(temp_dict)
 # print(json_string)
