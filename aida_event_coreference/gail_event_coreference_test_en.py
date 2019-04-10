@@ -36,7 +36,7 @@ if xdoc:
                         article = f.read()
                         rsd_data.append(article)
 temp_dict['rsd_data'] = rsd_data
-
+temp_dict['rsd_doc_index'] = rsd_doc_index
 
 json_string = json.dumps(temp_dict)
 r = requests.post('http://127.0.0.1:6001/aida_event_coreference_eng', json=json_string)
