@@ -24,6 +24,17 @@ with open(input_event_cs_file_path) as f:
 temp_dict['xdoc'] = args['xdoc']
 temp_dict['rsd_dir'] = args['rsd_dir']
 temp_dict['doc_per_doc'] = args['doc_per_doc']
+rsd_data = []
+rsd_doc_index = {}
+if xdoc:
+        ii = 0
+        for doc in os.listdir(args.rsd_dir):
+                rsd_doc_index[str(ii)] = doc
+                ii += 1
+                with open(os.path.join(rsd_dir, doc)) as f:
+			article = f.read()
+                        rsd_data.append(article)
+temp_dict['rsd_data'] = rsd_data
 
 json_string = json.dumps(temp_dict)
 r = requests.post('http://127.0.0.1:6101/aida_event_coreference_rus', json=json_string)
