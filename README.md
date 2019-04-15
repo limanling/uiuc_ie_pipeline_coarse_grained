@@ -35,6 +35,12 @@ wget https://blender04.cs.rpi.edu/~zhangb8/lorelei/pytorch_models/en-nom_weaveh.
 tar -zxvf en-nom.tar.gz
 tar -zxvf en-nom_weaveh.tar.gz
 ```
+For event extraction models
+```
+cd ./aida_event
+wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_event_data.tgz
+tar -xzf aida_event_data.tgz
+```
 
 ## Deployment
 Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~5) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
@@ -75,7 +81,7 @@ Step 6. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
-docker run -i -t --rm -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
+docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
 ```
 
 Step 7. Start the event coreference solution
