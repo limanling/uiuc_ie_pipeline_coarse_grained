@@ -19,20 +19,28 @@ input_event_cs_file_path = args['event_cs']
 output_event_coreference_output_file_path = args['output_path']
 
 temp_dict = dict()
+temp_dict['event_cs'] = []
 with open(input_event_cs_file_path) as f:
-	temp_dict['event_cs'] = f.readlines()
+	lines = f.readlines()
+for line in lines:
+        if len(line.strip().split('\t'))<2 or line.strip().split('\t')[0][:len(':Event')] != ':Event':
+                continue
+        else:
+                if line.strip().split('\t')[1].lower().split('.')[0] == 'mention' and len(line.strip().split('\t')[1].lower().split('.'))<2:
+                        print(line,'ssssss')
+                temp_dict['event_cs'].append(line)
 
 temp_dict['xdoc'] = args['xdoc']
 temp_dict['rsd_dir'] = args['rsd_dir']
 temp_dict['doc_per_doc'] = args['doc_per_doc']
 rsd_data = []
 rsd_doc_index = {}
-if xdoc:
+if args['xdoc']:
         ii = 0
-        for doc in os.listdir(args.rsd_dir):
+        for doc in os.listdir(args['rsd_dir']):
                 rsd_doc_index[str(ii)] = doc
                 ii += 1
-                with open(os.path.join(rsd_dir, doc)) as f:
+                with open(os.path.join(args['rsd_dir'], doc)) as f:
                         article = f.read()
                         rsd_data.append(article)
 temp_dict['rsd_data'] = rsd_data
