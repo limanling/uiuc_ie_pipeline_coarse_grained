@@ -10,13 +10,13 @@ One single script to run AIDA pipeline. A demo is in [RPI AIDA Pipeline](https:/
 Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which may lead to permission issues in a NAS.
 
 ### Download the latest docker images
-Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `zhangt13/aida_event`,  `dylandilu/event_coreference_xdoc`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
+Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `charlesztt/aida_event`,  `dylandilu/event_coreference_xdoc`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
 ```bash
 docker pull mongo
 docker pull panx27/edl
 docker pull elisarpi/elisa-ie
 docker pull limanling/aida_relation
-docker pull zhangt13/aida_event
+docker pull charlesztt/aida_event
 docker pull dylandilu/event_coreference_xdoc
 docker pull limanling/aida_converter
 docker pull wangqy96/aida_nominal_coreference_en
@@ -81,7 +81,7 @@ Step 6. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
-docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 zhangt13/aida_event python gail_event.py
+docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 charlesztt/aida_event python gail_event.py
 ```
 
 Step 7. Start the event coreference solution
