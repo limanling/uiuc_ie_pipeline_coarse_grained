@@ -10,7 +10,8 @@ import codecs
 # dirty import from current dir
 script_dirname = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(script_dirname)
-from tokenizer import Tokenizer
+# print(script_dirname)
+from .tokenizer import Tokenizer
 
 
 def rsd2ltf(rsd_str, doc_id,

@@ -94,7 +94,7 @@ python aida_relation/gail_relation_test_en.py -l ${ltf_file_list} -f ${ltf_sourc
 #
 #python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
 #
-#docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
+#docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
 #python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
 #                                      --edl_path ${edl_cs} \
 #                                      --text_dir ${rsd_source} \
@@ -122,7 +122,7 @@ python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${e
 
 ### Final Merge
 #echo "Merging all items"
-#docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
+#docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
 #python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
 #
 ### ColdStart Format to AIF Format

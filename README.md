@@ -118,3 +118,8 @@ wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9000
 ```bash
 sh pipeline_sample.sh ${data_root}
 ```
+If there is a mapping between the file names, please provide the mapping file as a second parameter. 
+For example, in AIDA project, the final *.ttl files should be renamed to parent file id. 
+```bash
+sh pipeline_sample.sh ${data_root} ${parent_child_mapping_tab} ${child_column} ${parent_column}
+```

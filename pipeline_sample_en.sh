@@ -5,6 +5,9 @@
 ######################################################
 # input root path
 data_root=$1
+parent_child_tab_path=$2
+raw_id_column=$3
+rename_id_column=$4
 
 # ltf source folder path
 ltf_source=${data_root}/ltf
@@ -95,7 +98,7 @@ echo "Extracting fillers and new relation types"
 
 python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
 python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
                                       --edl_path ${edl_cs} \
                                       --text_dir ${rsd_source} \
@@ -123,7 +126,7 @@ python aida_event_coreference/gail_event_coreference_test_en.py -i ${event_resul
 
 ## Final Merge
 echo "Merging all items"
-docker run -it --rm -v ${PWD}:/tmp -w /tmp zhangt13/aida_event \
+docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
 python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
 
 ## ColdStart Format to AIF Format
@@ -139,6 +142,12 @@ echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_
 ### Running converter
 docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
 ./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
+
+if [ ! $# > 1 ]; then
+    mv ${data_root}"/ttl" ${data_root}"/ttl_tmp"
+    docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
+        python aida_utilities/postprocessing_rename_turtle.py ${parent_child_tab_path} ${raw_id_column} ${rename_id_column} ${data_root}"/ttl_tmp" ${data_root}"/ttl"
+fi
 
 echo "Final result in Cold Start Format is in "${data_root}"/en_full.cs"
 echo "Final result in Turtle Format is in "${data_root}"/ttl"
