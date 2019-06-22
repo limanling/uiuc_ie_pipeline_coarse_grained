@@ -118,7 +118,9 @@ wget --post-data 'The quick brown fox jumped over the lazy dog.' 'localhost:9000
 ```bash
 sh pipeline_sample.sh ${data_root}
 ```
-If there is a mapping between the file names, please provide the mapping file as a second parameter. For example, in AIDA project, the final *.ttl files should be renamed to parent file id. 
+For each raw document `doc_id.ltf.xml` and `doc_id.rsd.txt`, there will be a RDF format KB `doc_id.ttl` generated. 
+If the final *.ttl files needs to be renamed, please provide the mapping file between the raw_id and rename_id as a second parameter, and the raw_id_column as the third parameter, rename_id_column as the fourth parameter.
+For example, in AIDA project, each file can be mapped a parent file. The final *.ttl files should be renamed to parent_file_id, whereas the raw document is named by child_file_id. 
 ```bash
 sh pipeline_sample.sh ${data_root} ${parent_child_mapping_tab} ${child_column} ${parent_column}
 ```
