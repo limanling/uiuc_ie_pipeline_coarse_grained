@@ -2,7 +2,7 @@ import sys
 import os
 import requests
 import subprocess
-import nominal_corefer_en
+from nominal_corefer_en import get_nominal_corefer
 import json
 
 PWD=os.path.dirname(os.path.abspath(__file__))
@@ -58,7 +58,7 @@ def edl(indir, bio_path, outdir):
     dev = bio_path
     dev_e = '%s/merged.tab' % outdir
     out_e = '%s/merged_corefer.tab' % outdir
-    nominal_corefer_en.get_nominal_corefer(dev, dev_e, out_e)
+    get_nominal_corefer(dev, dev_e, out_e)
 
     cmd = [
         'python',

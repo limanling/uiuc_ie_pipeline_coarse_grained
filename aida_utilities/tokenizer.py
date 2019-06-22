@@ -2,7 +2,7 @@
 import os
 import jieba
 import nltk
-nltk.data.path.append('/nas/data/m2/zhangb8/nltk_data')
+# nltk.data.path.append('/nas/data/m2/zhangb8/nltk_data')
 import re
 import itertools
 import unicodedata as ud
