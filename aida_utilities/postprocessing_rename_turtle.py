@@ -17,7 +17,7 @@ parser.add_argument('output_folder', type=str,
                     help='the output directory where the files use parent_file_id')
 
 args = parser.parse_args()
-parent_child_tab_path = args.parent_child_tab_path
+parent_child_tab_path = args.parent_child_mapping_file
 raw_id_column = args.raw_id_column
 rename_id_column = args.rename_id_column
 input_folder = args.input_folder
@@ -42,7 +42,7 @@ for one_line in f:
     doc_id_to_root_dict[doc_id] = root_id
 
 for one_file in os.listdir(input_folder):
-    if '.ttl' not in one_file or '.turtle' not in one_file:
+    if '.ttl' not in one_file and '.turtle' not in one_file:
         continue
     # print(one_file)
     file_id = one_file.replace('.ttl', '').replace('.turtle', '')
