@@ -13,11 +13,11 @@ def get_nominal_corefer(dev, dev_e, dev_f, out_e):
     dev_e = io.open(dev_e, 'r').read().split("\n")
     while len(dev_e[-1]) == 0:
         dev_e = dev_e[:-1]
-	if dev_f != "":
-		print('Loading freebase edl mentions from %s...' % dev_f)
-		dev_f = io.open(dev_f, 'r').read().split("\n")
-		while len(dev_f[-1]) == 0:
-		    dev_f = dev_f[:-1]
+    if dev_f != "":
+        print('Loading freebase edl mentions from %s...' % dev_f)
+        dev_f = io.open(dev_f, 'r').read().split("\n")
+        while len(dev_f[-1]) == 0:
+            dev_f = dev_f[:-1]
     else:
         dev_f = None
     result = {'dev': dev, 'dev_e': dev_e, 'dev_f': dev_f}
@@ -42,10 +42,10 @@ if __name__ == '__main__':
         "--dev_e", default="data/en.linking.tab",
         help="Input lorelei edl location"
     )
-	parser.add_argument(
-		"--dev_f", default="",
-		help="Input freebase edl location"
-	)
+    parser.add_argument(
+        "--dev_f", default="",
+        help="Input freebase edl location"
+    )
     parser.add_argument(
         "--out_e", default="en.linking.tab",
         help="Output edl location"
