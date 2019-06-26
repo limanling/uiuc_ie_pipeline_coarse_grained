@@ -15,7 +15,7 @@ def get_nominal_corefer(dev, dev_e, dev_f, out_e):
         dev_e = dev_e[:-1]
 	if dev_f != "":
 		print('Loading freebase edl mentions from %s...' % dev_f)
-		dev_f = io.open(dev_ft, 'r').read().split("\n")
+		dev_f = io.open(dev_f, 'r').read().split("\n")
 		while len(dev_f[-1]) == 0:
 		    dev_f = dev_f[:-1]
     else:
