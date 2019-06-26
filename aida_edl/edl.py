@@ -58,7 +58,7 @@ def edl(indir, bio_path, outdir):
     dev = bio_path
     dev_e = '%s/merged.tab' % outdir
     out_e = '%s/merged_corefer.tab' % outdir
-    get_nominal_corefer(dev, dev_e, out_e)
+    get_nominal_corefer(dev, dev_e, out_e=out_e)
 
     cmd = [
         'python',

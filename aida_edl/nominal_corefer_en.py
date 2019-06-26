@@ -4,7 +4,7 @@ import json
 import argparse
 import io
 
-def get_nominal_corefer(dev, dev_e, dev_f, out_e):
+def get_nominal_corefer(dev, dev_e, dev_f=None, out_e=None):
     print('Loading tagged docs from %s...' % dev)
     dev = io.open(dev, 'r').read().split("\n")
     while len(dev[-1]) == 0:
@@ -13,7 +13,7 @@ def get_nominal_corefer(dev, dev_e, dev_f, out_e):
     dev_e = io.open(dev_e, 'r').read().split("\n")
     while len(dev_e[-1]) == 0:
         dev_e = dev_e[:-1]
-    if dev_f != "":
+    if dev_f is not None and dev_f != "":
         print('Loading freebase edl mentions from %s...' % dev_f)
         dev_f = io.open(dev_f, 'r').read().split("\n")
         while len(dev_f[-1]) == 0:
