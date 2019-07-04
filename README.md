@@ -13,13 +13,13 @@ Please do not set up RPI AIDA Pipeline in a NAS, as the EDL needs MongoDB, which
 Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`， `limanling/aida_relation`, `charlesztt/aida_event`,  `dylandilu/event_coreference_xdoc`, and `wangqy96/aida_nominal_coreference_en`) or runtime environments (`limanling/aida_converter`).
 ```bash
 docker pull mongo
-docker pull panx27/edl
-docker pull elisarpi/elisa-ie
-docker pull limanling/aida_relation
-docker pull charlesztt/aida_event
-docker pull dylandilu/event_coreference_xdoc
-docker pull limanling/aida_converter
-docker pull wangqy96/aida_nominal_coreference_en
+docker pull blendernlp/edl
+docker pull blendernlp/elisa-ie
+docker pull blendernlp/aida_relation
+docker pull blendernlp/aida_event
+docker pull blendernlp/event_coreference_xdoc
+docker pull blendernlp/aida_converter
+docker pull blendernlp/aida_nominal_coreference_en
 ```
 
 ### Download the latest models
@@ -57,38 +57,38 @@ docker run --rm -v ${PWD}/aida_edl/index/db:/data/db --name db mongo
 
 Step 2. Start the EDL server
 ```bash
-docker run --rm -p 2201:2201 --link db:mongo panx27/edl python ./edl/api/web.py 2201
+docker run --rm -p 2201:2201 --link db:mongo blendernlp/edl python ./edl/api/web.py 2201
 ```
 
 Step 3. Start the nominal coreference server
 ```bash
-docker run -i -t --rm -w /aida_nominal_coreference_en -p 2468:2468 wangqy96/aida_nominal_coreference_en python nominal_backend.py
+docker run -i -t --rm -w /aida_nominal_coreference_en -p 2468:2468 blendernlp/aida_nominal_coreference_en python nominal_backend.py
 ```
 
 Step 4. Start the name tagger
 ```bash
-docker run --rm -p 3300:3300 --network="host" -v ${PWD}/aida_edl/models/:/usr/src/app/data/name_tagger/pytorch_models -ti elisarpi/elisa-ie /usr/src/app/lorelei_demo/run.py --preload --in_domain
+docker run --rm -p 3300:3300 --network="host" -v ${PWD}/aida_edl/models/:/usr/src/app/data/name_tagger/pytorch_models -ti blendernlp/elisa-ie /usr/src/app/lorelei_demo/run.py --preload --in_domain
 ```
 
 Step 5. Start the relation extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "relation_backend"" message.
 ```bash
-docker run -i -t --rm -w /aida_relation -p 5000:5000 limanling/aida_relation python relation_backend.py
+docker run -i -t --rm -w /aida_relation -p 5000:5000 blendernlp/aida_relation python relation_backend.py
 ```
 
 Step 6. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
-docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 charlesztt/aida_event python gail_event.py
+docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 blendernlp/aida_event python gail_event.py
 ```
 
 Step 7. Start the event coreference solution
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6001, 6101 and 6201 are for English, Russian and Ukrainian respectively.
 ```bash
-docker run -i -t --rm -w /event_coreference_xdoc -p 6001:6001 dylandilu/event_coreference_xdoc python aida_event_coreference_backen_eng.py
+docker run -i -t --rm -w /event_coreference_xdoc -p 6001:6001 blendernlp/event_coreference_xdoc python aida_event_coreference_backen_eng.py
 ```
 
 Step 8. Prepare Stanford CoreNLP
