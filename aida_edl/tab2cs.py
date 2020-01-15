@@ -9,8 +9,8 @@ def read_tab(pdata, add_conf=False):
     with open(pdata, 'r') as f:
         for line in f:
             tmp = line.rstrip('\n').split('\t')
-            if len(tmp) != 8:
-                continue
+            # if len(tmp) != 8:
+            #     continue
             mention = tmp[2]
             # Mention
             mention = mention.replace('\t', ' ') \
@@ -20,8 +20,8 @@ def read_tab(pdata, add_conf=False):
             offset = tmp[3]
             docid = re.match('(.+):(\d+)-(\d+)', offset).group(1)
             kbid = tmp[4]
-            if kbid.startswith('NIL'):
-                kbid = '%s_%s' % (kbid, docid)
+            # if kbid.startswith('NIL'):
+            kbid = '%s_%s' % (kbid, docid)
             etype = tmp[5]
             mtype = tmp[6]
             if add_conf:
@@ -40,7 +40,7 @@ def read_tab(pdata, add_conf=False):
 
 
 def process(p_tab, p_out, prefix):
-    data, etypes = read_tab(p_tab)
+    data, etypes = read_tab(p_tab, add_conf=True)
     out = open(p_out, 'w')
     count = 0
 

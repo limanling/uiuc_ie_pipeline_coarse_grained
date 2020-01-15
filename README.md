@@ -14,6 +14,7 @@ Docker images will work as services (`mongo`, `panx27/edl`, `elisarpi/elisa-ie`ï
 ```bash
 docker pull mongo
 docker pull panx27/edl
+docker pull limanling/aida_entity
 docker pull elisarpi/elisa-ie
 docker pull limanling/aida_relation
 docker pull charlesztt/aida_event

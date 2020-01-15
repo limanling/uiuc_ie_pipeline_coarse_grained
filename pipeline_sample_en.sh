@@ -9,6 +9,7 @@ parent_child_tab_path=$2
 raw_id_column=$3
 rename_id_column=$4
 
+lang="en"
 # ltf source folder path
 ltf_source=${data_root}/ltf
 # rsd source folder path
@@ -27,10 +28,14 @@ edl_tab_nocorefer=${edl_output_dir}/merged.tab
 edl_tab=${edl_output_dir}/merged_corefer.tab
 #edl_tab=${edl_output_dir}/merged.tab
 edl_cs=${edl_output_dir}/merged.cs
+fine_grain_model_result=${edl_output_dir}/merged_fine.tsv
+entity_fine=${edl_output_dir}/merged_fine.cs
+
 
 # filler output
 core_nlp_output_path=${data_root}/corenlp
-filler_output_path=${edl_output_dir}/filler_en.cs
+filler_coarse=${edl_output_dir}/filler_en.cs
+filler_fine=${edl_output_dir}/filler_fine.cs
 
 # relation output
 relation_result_dir=${data_root}/relation   # final cs output file path
@@ -102,9 +107,14 @@ docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
 python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
                                       --edl_path ${edl_cs} \
                                       --text_dir ${rsd_source} \
-                                      --filler_path ${filler_output_path}  \
+                                      --filler_path ${filler_coarse}  \
                                       --relation_path ${new_relation_output_path} \
                                       --units_path aida_filler/units_clean.txt
+
+# Fine-grained entity and fillers
+python aida_edl/fine_grained_entity.py ${lang} ${fine_grain_model_result} ${edl_cs} \
+    ${entity_fine} ${filler_fine} \
+    --filler_coarse ${filler_coarse} \
 
 ## Event Extraction
 echo "Extracting events"
@@ -119,7 +129,7 @@ else
     echo "Created new dir: "${event_result_dir}" for new run. Please make sure that the dir is correct!!!"
 fi
 ### Run event extractor
-python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_output_path} -o ${event_result_file_with_time}
+python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_coarse} -o ${event_result_file_with_time}
 
 ### Event coreference
 python aida_event_coreference/gail_event_coreference_test_en.py -i ${event_result_file_with_time} -o ${event_result_file_corefer} -r ${rsd_source} -x
@@ -127,27 +137,27 @@ python aida_event_coreference/gail_event_coreference_test_en.py -i ${event_resul
 ## Final Merge
 echo "Merging all items"
 docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
-python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
+python aida_utilities/pipeline_merge.py -e ${entity_fine} -f ${filler_fine} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
 
-## ColdStart Format to AIF Format
-echo "Generating AIF format"
-### Generating parameter file
-echo "inputKBFile: /AIDA-Interchange-Format-master/sample_params/"${final_output_file} > ${data_root}/rpi_params
-echo "baseURI: http://www.isi.edu/gaia" >> ${data_root}/rpi_params
-echo "systemURI: http://www.rpi.edu" >> ${data_root}/rpi_params
-echo "mode: SHATTER" >> ${data_root}/rpi_params
-echo "ontology: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/SeedlingOntology" >> ${data_root}/rpi_params
-echo "relationArgsFile: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/seedling_relation_args.csv" >> ${data_root}/rpi_params
-echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_root}"/ttl/" >> ${data_root}/rpi_params
-### Running converter
-docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
-./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
-
-if [ ! $# > 1 ]; then
-    mv ${data_root}"/ttl" ${data_root}"/ttl_tmp"
-    docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
-        python aida_utilities/postprocessing_rename_turtle.py ${parent_child_tab_path} ${raw_id_column} ${rename_id_column} ${data_root}"/ttl_tmp" ${data_root}"/ttl"
-fi
+### ColdStart Format to AIF Format
+#echo "Generating AIF format"
+#### Generating parameter file
+#echo "inputKBFile: /AIDA-Interchange-Format-master/sample_params/"${final_output_file} > ${data_root}/rpi_params
+#echo "baseURI: http://www.isi.edu/gaia" >> ${data_root}/rpi_params
+#echo "systemURI: http://www.rpi.edu" >> ${data_root}/rpi_params
+#echo "mode: SHATTER" >> ${data_root}/rpi_params
+#echo "ontology: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/SeedlingOntology" >> ${data_root}/rpi_params
+#echo "relationArgsFile: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/seedling_relation_args.csv" >> ${data_root}/rpi_params
+#echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_root}"/ttl/" >> ${data_root}/rpi_params
+#### Running converter
+#docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
+#./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
+#
+#if [ ! $# > 1 ]; then
+#    mv ${data_root}"/ttl" ${data_root}"/ttl_tmp"
+#    docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
+#        python aida_utilities/postprocessing_rename_turtle.py ${parent_child_tab_path} ${raw_id_column} ${rename_id_column} ${data_root}"/ttl_tmp" ${data_root}"/ttl"
+#fi
 
 echo "Final result in Cold Start Format is in "${data_root}"/en_full.cs"
-echo "Final result in Turtle Format is in "${data_root}"/ttl"
+#echo "Final result in Turtle Format is in "${data_root}"/ttl"
