@@ -1,13 +1,10 @@
 import ujson as json
-from nltk.stem import PorterStemmer
 import os
 from collections import defaultdict, Counter
 import argparse
 
-import sys
-sys.path.append("/nas/data/m1/lim22/aida")
-from util.ltf_util import LTF_util
-from util.finegrain_util import FineGrainedUtil
+from .util.ltf_util import LTF_util
+from .util.finegrain_util import FineGrainedUtil
 
 from nltk.stem.snowball import SnowballStemmer
 from nltk import WordNetLemmatizer

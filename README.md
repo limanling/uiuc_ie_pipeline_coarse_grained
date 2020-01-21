@@ -21,14 +21,15 @@ docker pull graham3333/corenlp-complete
 ### Download the latest models
 Please download the models for EDL, and event extraction.
 ```
-wget linking/edl_data.tar.gz
-tar zxvf linking/edl_data.tar.gz
+wget http://159.89.180.81/demo/resources/edl_data.tar.gz
+tar zxvf edl_data.tar.gz
 ```
 For event extraction models
 ```
 cd ./aida_event
-wget https://blender04.cs.rpi.edu/~zhangt13/pipeline/aida_event_data.tgz
+wget http://159.89.180.81/demo/resources/aida_event_data.tgz
 tar -xzf aida_event_data.tgz
+cd ..
 ```
 
 ## Deployment
@@ -41,7 +42,7 @@ Step 1. Start the EDL mongo database server
 Please wait until you see "waiting for connections on port 27017" message appear on the screen.
 
 ```bash
-docker run --rm -d -v ${PWD}/linking/edl_data/db:/data/db --name db mongo
+docker run --rm -d -v ${PWD}/edl_data/db:/data/db --name db mongo
 ```
 
 Step 2. Start the nominal coreference server
