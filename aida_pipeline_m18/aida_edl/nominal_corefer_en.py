@@ -3,6 +3,7 @@ import os
 import json
 import argparse
 import io
+import shutil
 
 def get_nominal_corefer(dev, dev_e, dev_f=None, out_e=None):
     print('Loading tagged docs from %s...' % dev)
@@ -50,5 +51,14 @@ if __name__ == '__main__':
         "--out_e", default="en.linking.tab",
         help="Output edl location"
     )
+    parser.add_argument(
+        "--use_nominal_corefer", type=int, default=1,
+        help="Use nominal coreference or not. If not, just copy the original *.tab as as final tab."
+    )
     args = parser.parse_args()
-    get_nominal_corefer(args.dev, args.dev_e, args.dev_f, args.out_e)
+
+    if args.use_nominal_corefer == 0:
+        # If not use_nominal_coreference, just copy the original *.tab as as final tab.
+        shutil.copy(args.dev_e, args.out_e)
+    else:
+        get_nominal_corefer(args.dev, args.dev_e, args.dev_f, args.out_e)
