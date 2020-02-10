@@ -15,44 +15,58 @@ docker pull limanling/uiuc_ie_m18
 docker pull charlesztt/aida_event
 docker pull dylandilu/event_coreference_xdoc
 docker pull wangqy96/aida_nominal_coreference_en
-docker pull graham3333/corenlp-complete
+docker pull frnkenstien/corenlp
 ```
 
 ### Download the latest models
 Please download the models for EDL, and event extraction.
-```
+
+```bash
+#docker run --rm -v ${PWD}/system/aida_edl/edl_data:/tmp_db -i -t limanling/uiuc_ie_m18 cp -r /data/. /tmp_db
+
+cd system/aida_edl/edl_data/db
 wget http://159.89.180.81/demo/resources/edl_data.tar.gz
 tar zxvf edl_data.tar.gz
+cd ../../../..
 ```
 For event extraction models
-```
-cd ./aida_event
+```bash
+#docker run --rm -v ${PWD}/system/aida_event/aida_event_data:/tmp_event -i -t limanling/uiuc_ie_m18 cp -r / /tmp_event
+
+cd system/aida_event
 wget http://159.89.180.81/demo/resources/aida_event_data.tgz
 tar -xzf aida_event_data.tgz
-cd ..
+cd ../..
 ```
 
 ## Deployment
 Please ensure that you are under the root folder of this project, and after each of the following dockers (step 1~5) is started, please open a new terminal to continue with another docker (of course, under the same root folder).
 
-Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2201`, `3300`, `5000`, `5234`, `9000`, `6001`, `6101` and `6201`.
+Also please reserve the the following ports and ensure that no other programs/services are occupying these ports: `27017`, `2468`, `5500`, `5000`, `5234`, `9000`, `6001`, `6101` and `6201`.
 
 Step 1. Start the EDL mongo database server
 
 Please wait until you see "waiting for connections on port 27017" message appear on the screen.
 
 ```bash
-docker run --rm -d -v ${PWD}/edl_data/db:/data/db --name db mongo
+#docker run --rm -d -v ${PWD}/system/aida_edl/edl_data:/data limanling/uiuc_ie_m18 sh download_models.sh
+#docker run --rm limanling/uiuc_ie_m18 ls /data
+#docker cp limanling/uiuc_ie_m18:/data/. ${PWD}/system/aida_edl/edl_data
+#docker run --rm -d -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 rm db
+docker run --rm -v ${PWD}/system/aida_edl/edl_data/db:/data/db --name db mongo
+
+docker run --rm -v /shared/nas/data/m1/manling2/aida_docker/aida_m18/edl_data/db:/data/db --name db mongo
+
 ```
 
 Step 2. Start the nominal coreference server
 ```bash
-docker run -i -t --rm -w /aida_nominal_coreference_en -p 2468:2468 wangqy96/aida_nominal_coreference_en python nominal_backend.py
+docker run -i -t --rm -w /aida_nominal_coreference_en -p 2468:2468 --name nominal_coreference wangqy96/aida_nominal_coreference_en python nominal_backend.py
 ```
 
 Step 3. Start the name tagger
 ```bash
-docker run -i -t --rm  -w /entity_api -p 5500:5500 limanling/uiuc_ie_m18 \
+docker run -i -t --rm --name uiuc_ie_m18 -w /entity_api -p 5500:5500 --name edl limanling/uiuc_ie_m18 \
     /opt/conda/envs/aida_entity/bin/python \
     /entity_api/entity_api/app.py
 ```
@@ -61,21 +75,21 @@ Step 4. Start the event extractor
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app ..." message.
 ```bash
-docker run -i -t --rm -v ${PWD}/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 charlesztt/aida_event python gail_event.py
+docker run -i -t --rm -v ${PWD}/system/aida_event/aida_event_data:/tmp -w /aida_event -p 5234:5234 --name event charlesztt/aida_event python gail_event.py
 ```
 
 Step 5. Start the event coreference solution
 
 This step will take a few minutes, you can proceed after you see "Serving Flask app "aida_event_coreference_backen_{eng, rus, ukr}"" message. Notice that the port 6001, 6101 and 6201 are for English, Russian and Ukrainian respectively.
 ```bash
-docker run -i -t --rm -w /event_coreference_xdoc -p 6001:6001 dylandilu/event_coreference_xdoc python aida_event_coreference_backen_eng.py
+docker run -i -t --rm -w /event_coreference_xdoc -p 6001:6001 --name event_coreference dylandilu/event_coreference_xdoc python aida_event_coreference_backen_eng.py
 ```
 
 Step 6. Prepare Stanford CoreNLP
 
 Please start the CoreNLP Server under the CoreNLP folder.
 ```bash
-docker run -itd -p 9000:9000 --name corenlp graham3333/corenlp-complete
+docker run -p 9000:9000 --name coreNLP --rm -i -t frnkenstien/corenlp
 ```
 Please test the CoreNLP Server is running successfully:
 ```bash

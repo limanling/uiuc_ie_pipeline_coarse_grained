@@ -14,6 +14,7 @@ from nltk.stem.snowball import SnowballStemmer
 import os
 import numpy as np
 
+CURRENT_DIR = os.path.abspath(os.path.dirname(__file__))
 prefix = "https://tac.nist.gov/tracks/SM-KBP/2019/ontologies/LDCOntology#"
 lemmatizer = WordNetLemmatizer()
 
@@ -168,7 +169,7 @@ def update_type(entity_id, entity_offsets, entity_mentions, entity_geonames,
     mention_size = len(entity_mentions)
 
     # # check ground truth type:
-    # new_types_by_gt = defaultdict(int)
+    new_types_by_gt = defaultdict(int)
     # for offset in entity_offsets:
     #     if offset in groundtruth_offset_type:
     #         aida_type = groundtruth_offset_type[offset]
@@ -401,10 +402,10 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('lang', type=str,
                         help='lang.')
-    # parser.add_argument('entity_finegrain', type=str,
-    #                     help='entity_finegrain.json')
-    # parser.add_argument('entity_freebase_tab', type=str,
-    #                     help='entity_freebase_tab')
+    parser.add_argument('entity_finegrain', type=str,
+                        help='entity_finegrain.json')
+    parser.add_argument('entity_freebase_tab', type=str,
+                        help='entity_freebase_tab')
     parser.add_argument('fine_grain_model_result', type=str,
                         help='fine-grained typing model result')
     parser.add_argument('entity_coarse', type=str,
@@ -437,10 +438,10 @@ if __name__ == '__main__':
     ground_truth_tab_dir = args.ground_truth_tab_dir
 
     stemmer = load_stemmer(lang)
-    mapping_file = 'conf/aida_yago_mapping_weighted.txt'
-    mapping_backup_file = 'conf/rename_type.txt'
-    geonames_mapping_file = 'conf/geonames_mapping.txt'
-    keywords_file = 'conf/keywords.txt'
+    mapping_file = os.path.join(CURRENT_DIR, 'conf/aida_yago_mapping_weighted.txt')
+    mapping_backup_file = os.path.join(CURRENT_DIR, 'conf/rename_type.txt')
+    geonames_mapping_file = os.path.join(CURRENT_DIR, 'conf/geonames_mapping.txt')
+    keywords_file = os.path.join(CURRENT_DIR, 'conf/keywords.txt')
 
     # hierarchy_dir = 'conf/yago_taxonomy_wordnet_single_parent.json'
     # finetype_util = FineGrainedUtil(hierarchy_dir)

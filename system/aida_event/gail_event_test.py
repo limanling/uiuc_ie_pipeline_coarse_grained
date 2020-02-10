@@ -27,6 +27,10 @@ input_edl_tab_file_path = args['edl_tab']
 input_filler_cs_file_path = args['filler_cs']
 output_event_output_file_path = args['output_path']
 
+if not os.path.exists(os.path.dirname(output_event_output_file_path)):
+    os.makedirs(os.path.dirname(output_event_output_file_path), exist_ok=True)
+
+
 temp_dict = dict()
 temp_dict['edl_cs'] = io.open(input_edl_cs_file_path, encoding='utf-8').read()
 temp_dict['edl_tab'] = io.open(input_edl_tab_file_path, encoding='utf-8').read()

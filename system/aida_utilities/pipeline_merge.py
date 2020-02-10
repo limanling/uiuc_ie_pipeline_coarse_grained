@@ -18,6 +18,7 @@ new_relation_file_path = args['newrelation']
 event_file_path = args['event']
 output_file_path = args['output_file']
 
+# uri_head = 'https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#'
 uri_head = 'https://tac.nist.gov/tracks/SM-KBP/2018/ontologies/SeedlingOntology#'
 mapping_file_path = 'aida_event/config/cs_to_aida_ontology_mapping.csv'
 ontology_mapping_dict = dict()

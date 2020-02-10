@@ -372,7 +372,7 @@ if __name__ == '__main__':
     # parser.add_argument('output_dir', default=str, help='output')
     parser.add_argument('output', default=str,
                         help='output')
-    parser.add_argument('visualpath', default=str,
+    parser.add_argument('--visualpath', default=str,
                         help='visualpath')
     parser.add_argument('--trans_file', type=str,
                         help='trans_file')
@@ -448,39 +448,40 @@ if __name__ == '__main__':
     event_newtype = update_type_all(event_dict, type_dict, trigger_dict, context_dict, ltf_util, trans, lang, stemmer, en_stemmer)
     rewrite(event_newtype, event_coarse, output)
 
-    head = '''
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Page Title</title>
-    </head>
-    <body>
-    '''
+    if args.visualpath is not None:
+        head = '''
+        <!DOCTYPE html>
+        <html>
+        <head>
+        <title>Page Title</title>
+        </head>
+        <body>
+        '''
 
-    tail = '''
-    </body>
-    </html>
-    '''
+        tail = '''
+        </body>
+        </html>
+        '''
 
-    f_html = open(visualpath, 'w')
-    f_html.write('%s\n' % head)
-    count = 0
-    for event in event_newtype:
-        for trigger in event_dict[event]['mention']:
-            count = count + 1
-            ###    print('Trigger: %s'%trigger[3], 'Argument: %s'%argument[3])
-            f_html.write('<p>%d. Old Event type: %s;<br> New Event type: %s;<br> Trigger: %s;</p>' % ( #<br> Argument: %s; Argument Role: %s
-                count, event_dict[event]['type'], event_newtype[event], trigger))  # , event_dict[event]['type']
-            sent_out = ltf_util.get_context(event_dict[event]['mention'][trigger])
-            sent_out_new = []
-            for word in sent_out:
-                if word == trigger:
-                    word = '<span style="color:blue">' + word + '</span>'
-                sent_out_new.append(word)
-            f_html.write('<p>%s</p><br><br>' % (' '.join(sent_out_new)))
-            # one trigger ##(??? multiple trigger?) -> no coreference, so not yet
-            continue
-    f_html.flush()
-    f_html.close()
+        f_html = open(visualpath, 'w')
+        f_html.write('%s\n' % head)
+        count = 0
+        for event in event_newtype:
+            for trigger in event_dict[event]['mention']:
+                count = count + 1
+                ###    print('Trigger: %s'%trigger[3], 'Argument: %s'%argument[3])
+                f_html.write('<p>%d. Old Event type: %s;<br> New Event type: %s;<br> Trigger: %s;</p>' % ( #<br> Argument: %s; Argument Role: %s
+                    count, event_dict[event]['type'], event_newtype[event], trigger))  # , event_dict[event]['type']
+                sent_out = ltf_util.get_context(event_dict[event]['mention'][trigger])
+                sent_out_new = []
+                for word in sent_out:
+                    if word == trigger:
+                        word = '<span style="color:blue">' + word + '</span>'
+                    sent_out_new.append(word)
+                f_html.write('<p>%s</p><br><br>' % (' '.join(sent_out_new)))
+                # one trigger ##(??? multiple trigger?) -> no coreference, so not yet
+                continue
+        f_html.flush()
+        f_html.close()
 
     print("Fine-grained event typing done for ", lang)
