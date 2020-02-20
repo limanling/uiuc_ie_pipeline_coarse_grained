@@ -3,11 +3,14 @@
 ######################################################
 # Arguments
 ######################################################
+lang="en"
 # input root path
-data_root=$1
+data_root=data/testdata/${lang}_small
+#data_root=$1
 parent_child_tab_path=$2
 raw_id_column=$3
 rename_id_column=$4
+use_nominal_corefer=1
 
 # ltf source folder path
 ltf_source=${data_root}/ltf
@@ -22,132 +25,176 @@ readlink -f ${rsd_source}/* > ${rsd_file_list}
 
 # edl output
 edl_output_dir=${data_root}/edl
-edl_bio=${edl_output_dir}/en.bio
-edl_tab_nocorefer=${edl_output_dir}/merged.tab
-edl_tab=${edl_output_dir}/merged_corefer.tab
-#edl_tab=${edl_output_dir}/merged.tab
-edl_cs=${edl_output_dir}/merged.cs
+edl_bio=${edl_output_dir}/${lang}.bio
+edl_tab_nam=${edl_output_dir}/${lang}.nam.tagged.tab
+edl_tab_nom=${edl_output_dir}/${lang}.nom.tagged.tab
+edl_tab_pro=${edl_output_dir}/${lang}.pro.tagged.tab
+edl_tab_link=${edl_output_dir}/${lang}.linking.tab
+edl_tab_link_fb=${edl_output_dir}/${lang}.linking.freebase.tab
+edl_tab_final=${edl_output_dir}/merged_final.tab
+edl_cs_coarse=${edl_output_dir}/merged.cs
+entity_fine_model=${edl_output_dir}/merged_fine.tsv
+edl_cs_fine=${edl_output_dir}/merged_fine.cs
+edl_json_fine=${edl_output_dir}/${lang}.linking.freebase.fine.json
+edl_tab_freebase=${edl_output_dir}/${lang}.linking.freebase.tab
+edl_cs_fine_all=${edl_output_dir}/merged_all_fine.cs
+
 
 # filler output
 core_nlp_output_path=${data_root}/corenlp
-filler_output_path=${edl_output_dir}/filler_en.cs
+filler_coarse=${edl_output_dir}/filler_en.cs
+filler_fine=${edl_output_dir}/filler_fine.cs
 
 # relation output
 relation_result_dir=${data_root}/relation   # final cs output file path
-relation_cs_name=en.rel.cs # final cs output for relation
-new_relation_output_path=${relation_result_dir}/new_relation_en.cs
+relation_cs_coarse=${relation_result_dir}/en.rel.cs # final cs output for relation
+relation_cs_fine=${relation_result_dir}/en.rel.cs # final cs output for relation
+new_relation_coarse=${relation_result_dir}/new_relation_en.cs
 
 # event output
 event_result_dir=${data_root}/event
-event_result_file_with_time=${event_result_dir}/events_tme.cs
-event_result_file_corefer=${event_result_dir}/events_corefer.cs
+event_coarse_with_time=${event_result_dir}/events_tme.cs
+event_fine=${event_result_dir}/events_fine.cs
+event_corefer=${event_result_dir}/events_corefer.cs
 
 # final output
-final_output_file=${data_root}/en_full.cs
-
-######################################################
-# Relation temporary files
-######################################################
-relation_tmp_output_dir=${relation_result_dir}/temp  # intermediate file path
-dp_name=dp.pkl
-eval_path=${relation_tmp_output_dir}/AIDA_plain_text.txt
-eval_result=${relation_tmp_output_dir}/AIDA_results.txt
-dp_path=${relation_tmp_output_dir}/${dp_name}
-
-######################################################
-# Event temporary files
-######################################################
-event_dep_dir=${data_root}/dep
-event_tmp_tdf_dir=${data_root}/tdf
-event_no_format_dir=${data_root}/event_no_format
-event_raw_result_file=${event_result_dir}/events_raw.cs
-
-######################################################
-# pipeline
-######################################################
+final_output_file=${data_root}/${lang}_full.cs
 
 ## EDL
-echo "Extracting entities and linking them to KB"
-mkdir -p ${edl_output_dir}
-python aida_utilities/ltf2bio.py ${ltf_source} ${edl_bio}
-python aida_edl/edl.py ${ltf_source} ${edl_bio} ${edl_output_dir}
+#echo "** Extracting entities **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_edl/edl.py \
+#    ${ltf_source} ${rsd_source} ${lang} ${edl_output_dir} \
+#    ${edl_bio} ${edl_tab_nam} ${edl_tab_nom} ${edl_tab_pro} \
+#    ${entity_fine_model}
+## linking
+#echo "** Linking entities to KB **"
+#link_dir=system/aida_edl/edl_data/test
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    mkdir -p ${link_dir}/input
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    cp -r ${edl_output_dir}/* ${link_dir}/input/
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    ls ${link_dir}/input
+#docker run -v ${PWD}/system/aida_edl/edl_data:/data --link db:mongo panx27/edl \
+#    python ./projs/docker_aida19/aida19.py \
+#    ${lang} /data/test/input /data/test/output
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    cp ${link_dir}/output/* ${edl_output_dir}/
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    rm -rf ${link_dir}
+### nominal coreference
+#echo "** Starting nominal coreference **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_edl/nominal_corefer_en.py \
+#    --dev ${edl_bio} \
+#    --dev_e ${edl_tab_link} \
+#    --dev_f ${edl_tab_link_fb} \
+#    --out_e ${edl_tab_final} \
+#    --use_nominal_corefer ${use_nominal_corefer}
+### tab2cs
+#docker run --rm -v `pwd`:`pwd` -w `pwd`  -i -t limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_edl/tab2cs.py \
+#    ${edl_tab_final} ${edl_cs_coarse} 'EDL'
+#
+### Relation Extraction (coarse)
+#echo "** Extraction relations **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/aida_relation_coarse/bin/python \
+#    -u /relation/CoarseRelationExtraction/exec_relation_extraction.py \
+#    -i ${lang} \
+#    -l ${ltf_file_list} \
+#    -f ${ltf_source} \
+#    -e ${edl_cs_coarse} \
+#    -t ${edl_tab_final} \
+#    -o ${relation_cs_coarse}
 
-## Relation Extraction
-echo "Extracting relations"
-### Create folders
-if [ -d "$relation_tmp_output_dir" ]
-then
-    echo "The output directory already exists, "$relation_tmp_output_dir". Please double check. "
-else
-    mkdir -p $relation_tmp_output_dir
-    echo "Created new dir: "$relation_tmp_output_dir" for new run. Please make sure that the dir is correct!!!"
-fi
 
-if [ -d "$relation_result_dir" ]
-then
-    echo "The output directory already exists, "$relation_result_dir". Please double check."
-else
-    mkdir -p $relation_result_dir
-    echo "Created new dir: "$relation_result_dir" for new run. Please make sure that the dir is correct!!!"
-fi
-### Run relation extractir
-python aida_relation/gail_relation_test_en.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -o ${relation_result_dir}/${relation_cs_name}
+### Filler Extraction & new relation
+#echo "** Extraction fillers **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_filler/nlp_utils.py \
+#    --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_filler/filler_generate.py \
+#    --corenlp_dir ${core_nlp_output_path} \
+#    --edl_path ${edl_cs_coarse} \
+#    --text_dir ${rsd_source} \
+#    --filler_path ${filler_coarse}  \
+#    --relation_path ${new_relation_coarse} \
+#    --units_path ./system/aida_filler/units_clean.txt
 
-### Fillers and new relation
-echo "Extracting fillers and new relation types"
+## Fine-grained Entity
+#echo "** Fine-grained entity typing **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_edl/fine_grained_entity.py \
+#    ${lang} ${edl_json_fine} ${edl_tab_freebase} ${entity_fine_model} \
+#    ${edl_cs_coarse} ${edl_cs_fine} ${filler_fine} \
+#    --filler_coarse ${filler_coarse}
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_utilities/pipeline_merge_m18.py \
+#    -e ${edl_cs_fine} -f ${filler_fine} -o ${edl_cs_fine_all}
+#
+## Event (Coarse)
+#echo "** Extracting events **"
+#docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    ./system/aida_event/gail_event_test.py \
+#    -l ${ltf_file_list} \
+#    -f ${ltf_source} \
+#    -e ${edl_cs_coarse} \
+#    -t ${edl_tab_final} \
+#    -i ${filler_coarse} \
+#    -o ${event_coarse_with_time}
 
-python aida_filler/nlp_utils.py --rsd_list ${rsd_file_list} --corenlp_dir ${core_nlp_output_path}
+### Relation Extraction (fine)
+#docker run -v `pwd`:`pwd` -w `pwd` -i -t limanling/uiuc_ie_m18 \
+#    /opt/conda/envs/py36/bin/python \
+#    -u /relation/FineRelationExtraction/EVALfine_grained_relations.py \
+#    --lang_id ${lang} \
+#    --ltf_dir ${ltf_source} \
+#    --rsd_dir ${rsd_source} \
+#    --cs_fnames ${edl_cs_coarse} ${filler_coarse} ${relation_cs_coarse} ${new_relation_coarse} \
+#    --fine_ent_type_tab ${edl_tab_freebase} \
+#    --fine_ent_type_json ${edl_json_fine} \
+#    --outdir ${relation_result_dir} \
+#    --fine_grained
+###   --reuse_cache \
+###    --use_gpu \
 
-docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
-python aida_filler/filler_generate.py --corenlp_dir ${core_nlp_output_path} \
-                                      --edl_path ${edl_cs} \
-                                      --text_dir ${rsd_source} \
-                                      --filler_path ${filler_output_path}  \
-                                      --relation_path ${new_relation_output_path} \
-                                      --units_path aida_filler/units_clean.txt
 
-## Event Extraction
-echo "Extracting events"
+# Event (Fine-grained)
+echo "** Event fine-grained typing **"
+docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+    /opt/conda/envs/py36/bin/python \
+    ./system/aida_event/fine_grained/fine_grained_events.py \
+    ${lang} ${ltf_source} ${edl_json_fine} ${edl_tab_freebase} \
+    ${edl_cs_coarse} ${event_coarse_with_time} ${event_fine} \
+    --filler_coarse ${filler_coarse} \
+    --entity_finegrain_aida ${edl_cs_fine_all}
 
-### Create folders
-#mkdir ${event_result_dir}
-if [ -d "$event_result_dir" ]
-then
-    echo "The output directory already exists, "${event_result_dir}". Please double check."
-else
-    mkdir -p ${event_result_dir}
-    echo "Created new dir: "${event_result_dir}" for new run. Please make sure that the dir is correct!!!"
-fi
-### Run event extractor
-python aida_event/gail_event_test.py -l ${ltf_file_list} -f ${ltf_source} -e ${edl_cs} -t ${edl_tab} -i ${filler_output_path} -o ${event_result_file_with_time}
 
-### Event coreference
-python aida_event_coreference/gail_event_coreference_test_en.py -i ${event_result_file_with_time} -o ${event_result_file_corefer} -r ${rsd_source} -x
+# Event coreference
+docker run --rm -v `pwd`:`pwd` -w `pwd` -i -t --network="host" limanling/uiuc_ie_m18 \
+    /opt/conda/envs/py36/bin/python \
+    ./system/aida_event_coreference/gail_event_coreference_test_en.py \
+    -i ${event_fine} -o ${event_corefer} -r ${rsd_source}
 
-## Final Merge
-echo "Merging all items"
-docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
-python aida_utilities/pipeline_merge.py -e ${edl_cs} -f ${filler_output_path} -r ${relation_result_dir}/${relation_cs_name} -n ${new_relation_output_path} -v ${event_result_file_corefer} -o ${final_output_file}
+### Final Merge
+#echo "Merging all items"
+#docker run -it --rm -v `pwd`:`pwd` -w `pwd` limanling/uiuc_ie_m18 \
+#    python aida_utilities/pipeline_merge_m18.py \
+#    -e ${edl_cs_fine} -f ${filler_fine} \
+#    -r ${relation_cs_fine} \
+#    -v ${event_corefer} \
+#    -o ${final_output_file}
+#
+#echo "Final result in Cold Start Format is in "${data_root}"/en_full.cs"
 
-## ColdStart Format to AIF Format
-echo "Generating AIF format"
-### Generating parameter file
-echo "inputKBFile: /AIDA-Interchange-Format-master/sample_params/"${final_output_file} > ${data_root}/rpi_params
-echo "baseURI: http://www.isi.edu/gaia" >> ${data_root}/rpi_params
-echo "systemURI: http://www.rpi.edu" >> ${data_root}/rpi_params
-echo "mode: SHATTER" >> ${data_root}/rpi_params
-echo "ontology: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/SeedlingOntology" >> ${data_root}/rpi_params
-echo "relationArgsFile: /AIDA-Interchange-Format-master/src/main/resources/edu/isi/gaia/seedling_relation_args.csv" >> ${data_root}/rpi_params
-echo "outputAIFDirectory: /AIDA-Interchange-Format-master/sample_params/"${data_root}"/ttl/" >> ${data_root}/rpi_params
-### Running converter
-docker run -i -t --rm -v ${PWD}:/AIDA-Interchange-Format-master/sample_params -w /AIDA-Interchange-Format-master limanling/aida_converter \
-./target/appassembler/bin/coldstart2AidaInterchange ./sample_params/${data_root}/rpi_params
-
-if [ ! $# > 1 ]; then
-    mv ${data_root}"/ttl" ${data_root}"/ttl_tmp"
-    docker run -it --rm -v ${PWD}:/tmp -w /tmp charlesztt/aida_event \
-        python aida_utilities/postprocessing_rename_turtle.py ${parent_child_tab_path} ${raw_id_column} ${rename_id_column} ${data_root}"/ttl_tmp" ${data_root}"/ttl"
-fi
-
-echo "Final result in Cold Start Format is in "${data_root}"/en_full.cs"
-echo "Final result in Turtle Format is in "${data_root}"/ttl"
